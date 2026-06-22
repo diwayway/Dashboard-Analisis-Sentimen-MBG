@@ -236,13 +236,15 @@ with colB:
     )
 
     st.plotly_chart(bar_fig, width="stretch")
-    
-    st.subheader("Dataset Preview")
 
-    st.dataframe(
-        df[["full_text", "tweet_processed", "sentimen"]].head(20),
-        width="stretch"
-    )
+
+# keluar dari colB
+st.subheader("Dataset Preview")
+
+st.dataframe(
+    df[["full_text", "tweet_processed", "sentimen"]].head(20),
+    width="stretch"
+)
 
 # =====================================
 # TAB 2
