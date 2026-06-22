@@ -43,7 +43,7 @@ html, body, [class*="css"] {
 
 .sub-title{
     font-size:24px;
-    color:#914CD5;
+    color:#808080;
     font-weight:500;
     margin-bottom:30px;
 }
