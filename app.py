@@ -26,13 +26,25 @@ html, body, [class*="css"] {
 .main-title{
     font-size:64px;
     font-weight:700;
-    color:#1C7651;
     line-height:72px;
+
+    background: linear-gradient(
+        90deg,
+        #1C7651 0%,
+        #914CD5 35%,
+        #FB3679 70%,
+        #7CC1F2 100%
+    );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .sub-title{
     font-size:24px;
-    color:#914CD5;
+    color:#1C7651;
+    font-weight:500;
     margin-bottom:30px;
 }
 
