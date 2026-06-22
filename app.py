@@ -105,7 +105,7 @@ html, body, [class*="css"] {
 }
 
 .stTabs [aria-selected="true"]{
-    color:#914CD5;
+    color:#000000;
 }
 </style>
 """
