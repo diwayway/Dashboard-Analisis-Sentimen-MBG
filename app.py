@@ -50,7 +50,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-tab1, tab2 = st.tabs(["Overview", "Deep Analysis"])
+tab1, tab2 = st.tabs(["Overview", "Visualisasi"])
 
 with tab1:
     col1, col2, col3, col4, col5 = st.columns(5)
