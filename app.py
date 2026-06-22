@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 
 # =====================================
 # PAGE CONFIG
@@ -174,21 +175,68 @@ with tab1:
 
     colA, colB = st.columns(2)
 
-    with colA:
-        pie_fig = px.pie(
-            df,
-            names="sentimen",
-            hole=0.65
-        )
-        st.plotly_chart(pie_fig, width="stretch")
+# COUNT SENTIMENT
+sentiment_count = df["sentimen"].value_counts()
 
-    with colB:
-        bar_fig = px.histogram(
-            df,
-            x="sentimen"
+with colA:
+    pie_fig = go.Figure(data=[go.Pie(
+        labels=sentiment_count.index,
+        values=sentiment_count.values,
+        hole=0.65,
+        marker=dict(
+            colors=[
+                "#2FAF77",
+                "#FF78A8",
+                "#A9DBFF"
+            ]
         )
-        st.plotly_chart(bar_fig, width="stretch")
+    )])
 
+    pie_fig.update_layout(
+        paper_bgcolor="white",
+        font=dict(
+            family="Plus Jakarta Sans",
+            color="#111"
+        )
+    )
+
+    st.plotly_chart(pie_fig, width="stretch")
+
+with colB:
+    bar_fig = go.Figure()
+
+    bar_fig.add_trace(go.Bar(
+        x=sentiment_count.index,
+        y=sentiment_count.values,
+        marker=dict(
+            color=[
+                "#2FAF77",
+                "#FF78A8",
+                "#A9DBFF"
+            ],
+            line=dict(
+                color=[
+                    "#1C7651",
+                    "#FB3679",
+                    "#7CC1F2"
+                ],
+                width=2
+            )
+        )
+    ))
+
+    bar_fig.update_layout(
+        paper_bgcolor="white",
+        plot_bgcolor="white",
+        showlegend=False,
+        font=dict(
+            family="Plus Jakarta Sans",
+            color="#111"
+        )
+    )
+
+    st.plotly_chart(bar_fig, width="stretch")
+    
     st.subheader("Dataset Preview")
 
     st.dataframe(
