@@ -85,11 +85,18 @@ html, body, [class*="css"] {
     color:#111;
 }
 
+.insight-box{
+    background:#F8F8F8;
+    padding:20px;
+    border-radius:20px;
+    border:1px solid #EEEEEE;
+    margin-top:20px;
+}
+
 /* TEXT */
 .metric-title{
     font-size:18px;
     font-weight:500;
-    opacity:0.95;
 }
 
 .metric-value{
@@ -124,7 +131,7 @@ total_data = len(df)
 netral = len(df[df["sentimen"] == "netral"])
 negatif = len(df[df["sentimen"] == "negatif"])
 positif = len(df[df["sentimen"] == "positif"])
-accuracy = 93.29
+accuracy = 94.90
 
 # =====================================
 # HEADER
@@ -135,7 +142,7 @@ st.markdown(
 )
 
 st.markdown(
-    '<div class="sub-title">IndoBERT Labeling + IndoBERT Embedding + Decision Tree</div>',
+    '<div class="sub-title">IndoBERT Labeling + IndoBERT Embedding + SMOTE + Decision Tree</div>',
     unsafe_allow_html=True
 )
 
@@ -173,13 +180,60 @@ with tab1:
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # JUDUL DISTRIBUSI
+    # =====================================
+    # BEFORE VS AFTER SMOTE
+    # =====================================
+    st.subheader("Distribusi Data Sebelum dan Sesudah SMOTE")
+
+    col_smote1, col_smote2 = st.columns(2)
+
+    before_smote = {
+        "Netral": 1526,
+        "Negatif": 1054,
+        "Positif": 623
+    }
+
+    after_smote = {
+        "Netral": 1068,
+        "Negatif": 1068,
+        "Positif": 1068
+    }
+
+    with col_smote1:
+        st.markdown("**Sebelum SMOTE**")
+
+        before_fig = go.Figure(data=[
+            go.Bar(
+                x=list(before_smote.keys()),
+                y=list(before_smote.values()),
+                marker_color=["#2FAF77", "#FF78A8", "#A9DBFF"]
+            )
+        ])
+
+        st.plotly_chart(before_fig, width="stretch")
+
+    with col_smote2:
+        st.markdown("**Sesudah SMOTE**")
+
+        after_fig = go.Figure(data=[
+            go.Bar(
+                x=list(after_smote.keys()),
+                y=list(after_smote.values()),
+                marker_color=["#2FAF77", "#FF78A8", "#A9DBFF"]
+            )
+        ])
+
+        st.plotly_chart(after_fig, width="stretch")
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # =====================================
+    # DISTRIBUSI SENTIMEN
+    # =====================================
     st.subheader("Distribusi Sentimen MBG")
 
-    # CHART COLUMNS
     colA, colB = st.columns(2)
 
-    # COUNT SENTIMENT
     sentiment_count = df["sentimen"].value_counts()
 
     # PIE CHART
@@ -190,20 +244,12 @@ with tab1:
             hole=0.65,
             marker=dict(
                 colors=[
-                    "#2FAF77",   # Netral
-                    "#FF78A8",   # Negatif
-                    "#A9DBFF"    # Positif
+                    "#2FAF77",
+                    "#FF78A8",
+                    "#A9DBFF"
                 ]
             )
         )])
-
-        pie_fig.update_layout(
-            paper_bgcolor="white",
-            font=dict(
-                family="Plus Jakarta Sans",
-                color="#111"
-            )
-        )
 
         st.plotly_chart(pie_fig, width="stretch")
 
@@ -219,33 +265,15 @@ with tab1:
                     "#2FAF77",
                     "#FF78A8",
                     "#A9DBFF"
-                ],
-                line=dict(
-                    color=[
-                        "#1C7651",
-                        "#FB3679",
-                        "#7CC1F2"
-                    ],
-                    width=2
-                )
+                ]
             )
         ))
 
-        bar_fig.update_layout(
-            paper_bgcolor="white",
-            plot_bgcolor="white",
-            showlegend=False,
-            font=dict(
-                family="Plus Jakarta Sans",
-                color="#111"
-            ),
-            xaxis_title="Sentimen",
-            yaxis_title="Jumlah Data"
-        )
-
         st.plotly_chart(bar_fig, width="stretch")
 
+    # =====================================
     # DATASET PREVIEW
+    # =====================================
     st.subheader("Dataset Preview")
 
     st.dataframe(
@@ -253,19 +281,34 @@ with tab1:
         width="stretch"
     )
 
+    # =====================================
+    # INSIGHT MODEL
+    # =====================================
+    st.subheader("Insight Model")
+
+    st.markdown("""
+    <div class="insight-box">
+    <b>Kesimpulan:</b><br><br>
+    1. Dataset awal menunjukkan ketidakseimbangan kelas dengan dominasi sentimen netral.<br>
+    2. SMOTE berhasil menyeimbangkan distribusi data train menjadi proporsional.<br>
+    3. Model Decision Tree menghasilkan akurasi sebesar <b>94.90%</b> setelah balancing.<br>
+    4. Hasil ini menunjukkan bahwa balancing data meningkatkan performa klasifikasi sentimen.
+    </div>
+    """, unsafe_allow_html=True)
+
 # =====================================
 # TAB 2 - VISUALISASI
 # =====================================
 with tab2:
 
     st.subheader("Confusion Matrix")
-    st.image("asset/cm.png", width=900)
+    st.image("asset/cm.png", width=850)
 
     st.subheader("WordCloud")
-    st.image("asset/wordcloud.png", width=900)
+    st.image("asset/wordcloud.png", width=850)
 
     st.subheader("Top Words")
-    st.image("asset/topwords.png", width=900)
+    st.image("asset/topwords.png", width=850)
 
     st.subheader("Decision Tree")
-    st.image("asset/decisiontree.png", width=1200)
+    st.image("asset/decisiontree.png", width=1100)
