@@ -27,7 +27,6 @@ html, body, [class*="css"] {
     font-size:64px;
     font-weight:700;
     line-height:72px;
-
     background: linear-gradient(
         90deg,
         #1C7651 0%,
@@ -35,7 +34,6 @@ html, body, [class*="css"] {
         #FB3679 70%,
         #7CC1F2 100%
     );
-
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -55,8 +53,15 @@ html, body, [class*="css"] {
     color:white;
     box-shadow: 0px 8px 20px rgba(0,0,0,0.08);
     min-height:140px;
+    transition: all 0.3s ease;
 }
 
+.metric-card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0px 16px 30px rgba(0,0,0,0.12);
+}
+
+/* COLORS */
 .card-purple{
     background: linear-gradient(135deg,#914CD5,#B889F8);
 }
@@ -90,17 +95,9 @@ html, body, [class*="css"] {
     margin-top:15px;
 }
 
-.insight-box{
-    background:#F8F8F8;
-    padding:20px;
-    border-radius:20px;
-    border:1px solid #EEEEEE;
-}
-
-/* TABS */
 /* TABS */
 .stTabs [data-baseweb="tab-list"]{
-    gap: 20px;
+    gap:20px;
 }
 
 .stTabs [data-baseweb="tab"]{
@@ -157,7 +154,7 @@ tab1, tab2, tab3 = st.tabs([
 ])
 
 # =====================================
-# TAB 1 - DATASET
+# TAB 1
 # =====================================
 with tab1:
 
@@ -220,7 +217,7 @@ with tab1:
     )
 
 # =====================================
-# TAB 2 - SMOTE
+# TAB 2
 # =====================================
 with tab2:
 
@@ -262,10 +259,8 @@ with tab2:
 
         st.plotly_chart(after_fig, width="stretch")
 
-    """, unsafe_allow_html=True)
-
 # =====================================
-# TAB 3 - MODEL PERFORMANCE
+# TAB 3
 # =====================================
 with tab3:
 
@@ -291,5 +286,3 @@ with tab3:
 
     st.subheader("Decision Tree")
     st.image("asset/decisiontree.png", width=1000)
-
-    """, unsafe_allow_html=True)
