@@ -98,11 +98,22 @@ html, body, [class*="css"] {
 }
 
 /* TABS */
+/* TABS */
+.stTabs [data-baseweb="tab-list"]{
+    gap: 20px;
+}
+
 .stTabs [data-baseweb="tab"]{
     font-size:22px;
     font-weight:700;
     padding:16px 28px;
     height:70px;
+    border-radius:14px 14px 0px 0px;
+}
+
+.stTabs [aria-selected="true"]{
+    color:#FB3679;
+    border-bottom:3px solid #FB3679;
 }
 </style>
 """
