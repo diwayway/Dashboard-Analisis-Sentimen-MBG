@@ -259,13 +259,13 @@ with tab1:
 with tab2:
 
     st.subheader("Confusion Matrix")
-    st.image("asset/cm.png", width="stretch")
+    st.image("asset/cm.png", width=900)
 
     st.subheader("WordCloud")
-    st.image("asset/wordcloud.png", width="stretch")
+    st.image("asset/wordcloud.png", width=900)
 
     st.subheader("Top Words")
-    st.image("asset/topwords.png", width="stretch")
+    st.image("asset/topwords.png", width=900)
 
     st.subheader("Decision Tree")
-    st.image("asset/decisiontree.png", width="stretch")
+    st.image("asset/decisiontree.png", width=1200)
