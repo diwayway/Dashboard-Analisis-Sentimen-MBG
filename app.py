@@ -270,7 +270,6 @@ with tab2:
 
     st.markdown("""
     <div class="insight-box">
-        <h4>Insight Balancing Data</h4>
         <p>
         Sebelum dilakukan SMOTE, distribusi data menunjukkan ketidakseimbangan
         antar kelas sentimen. Kelas netral mendominasi data, sedangkan kelas
