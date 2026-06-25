@@ -99,8 +99,10 @@ html, body, [class*="css"] {
 
 /* TABS */
 .stTabs [data-baseweb="tab"]{
-    font-size:18px;
-    font-weight:600;
+    font-size:22px;
+    font-weight:700;
+    padding:16px 28px;
+    height:70px;
 }
 </style>
 """
