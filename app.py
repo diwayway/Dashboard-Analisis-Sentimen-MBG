@@ -153,7 +153,7 @@ st.markdown(
 tab1, tab2, tab3 = st.tabs([
     "Dataset",
     "Balancing (SMOTE)",
-    "Model Performance"
+    "Visualisasi"
 ])
 
 # =====================================
@@ -262,13 +262,6 @@ with tab2:
 
         st.plotly_chart(after_fig, width="stretch")
 
-    st.markdown("""
-    <div class="insight-box">
-    Dataset awal menunjukkan ketidakseimbangan distribusi kelas, 
-    di mana kelas netral lebih dominan dibandingkan kelas negatif dan positif.
-    Oleh karena itu dilakukan SMOTE untuk menyeimbangkan distribusi data 
-    sehingga model dapat belajar lebih optimal.
-    </div>
     """, unsafe_allow_html=True)
 
 # =====================================
