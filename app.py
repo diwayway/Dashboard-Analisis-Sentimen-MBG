@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 import plotly.graph_objects as go
 
 # =====================================
@@ -44,7 +43,7 @@ html, body, [class*="css"] {
 
 .sub-title{
     font-size:24px;
-    color:#000000;
+    color:#111111;
     font-weight:500;
     margin-bottom:30px;
 }
@@ -63,7 +62,7 @@ html, body, [class*="css"] {
     transform:translateY(-4px);
 }
 
-/* Gradient colors */
+/* CARD COLORS */
 .card-purple{
     background: linear-gradient(135deg,#914CD5,#B889F8);
 }
@@ -86,7 +85,7 @@ html, body, [class*="css"] {
     color:#111;
 }
 
-/* Text */
+/* TEXT */
 .metric-title{
     font-size:18px;
     font-weight:500;
@@ -99,7 +98,7 @@ html, body, [class*="css"] {
     margin-top:15px;
 }
 
-/* Tabs */
+/* TABS */
 .stTabs [data-baseweb="tab"]{
     font-size:18px;
     font-weight:600;
@@ -146,10 +145,11 @@ st.markdown(
 tab1, tab2 = st.tabs(["Overview", "Visualisasi"])
 
 # =====================================
-# TAB 1
+# TAB 1 - OVERVIEW
 # =====================================
 with tab1:
 
+    # METRIC CARDS
     col1, col2, col3, col4, col5 = st.columns(5)
 
     cards = [
@@ -173,92 +173,99 @@ with tab1:
 
     st.markdown("<br>", unsafe_allow_html=True)
 
+    # JUDUL DISTRIBUSI
+    st.subheader("Distribusi Sentimen MBG")
+
+    # CHART COLUMNS
     colA, colB = st.columns(2)
 
-# COUNT SENTIMENT
-sentiment_count = df["sentimen"].value_counts()
+    # COUNT SENTIMENT
+    sentiment_count = df["sentimen"].value_counts()
 
-with colA:
-    pie_fig = go.Figure(data=[go.Pie(
-        labels=sentiment_count.index,
-        values=sentiment_count.values,
-        hole=0.65,
-        marker=dict(
-            colors=[
-                "#2FAF77",
-                "#FF78A8",
-                "#A9DBFF"
-            ]
-        )
-    )])
+    # PIE CHART
+    with colA:
+        pie_fig = go.Figure(data=[go.Pie(
+            labels=sentiment_count.index,
+            values=sentiment_count.values,
+            hole=0.65,
+            marker=dict(
+                colors=[
+                    "#2FAF77",   # Netral
+                    "#FF78A8",   # Negatif
+                    "#A9DBFF"    # Positif
+                ]
+            )
+        )])
 
-    pie_fig.update_layout(
-        paper_bgcolor="white",
-        font=dict(
-            family="Plus Jakarta Sans",
-            color="#111"
-        )
-    )
-
-    st.plotly_chart(pie_fig, width="stretch")
-
-with colB:
-    bar_fig = go.Figure()
-
-    bar_fig.add_trace(go.Bar(
-        x=sentiment_count.index,
-        y=sentiment_count.values,
-        marker=dict(
-            color=[
-                "#2FAF77",
-                "#FF78A8",
-                "#A9DBFF"
-            ],
-            line=dict(
-                color=[
-                    "#1C7651",
-                    "#FB3679",
-                    "#7CC1F2"
-                ],
-                width=2
+        pie_fig.update_layout(
+            paper_bgcolor="white",
+            font=dict(
+                family="Plus Jakarta Sans",
+                color="#111"
             )
         )
-    ))
 
-    bar_fig.update_layout(
-        paper_bgcolor="white",
-        plot_bgcolor="white",
-        showlegend=False,
-        font=dict(
-            family="Plus Jakarta Sans",
-            color="#111"
+        st.plotly_chart(pie_fig, width="stretch")
+
+    # BAR CHART
+    with colB:
+        bar_fig = go.Figure()
+
+        bar_fig.add_trace(go.Bar(
+            x=sentiment_count.index,
+            y=sentiment_count.values,
+            marker=dict(
+                color=[
+                    "#2FAF77",
+                    "#FF78A8",
+                    "#A9DBFF"
+                ],
+                line=dict(
+                    color=[
+                        "#1C7651",
+                        "#FB3679",
+                        "#7CC1F2"
+                    ],
+                    width=2
+                )
+            )
+        ))
+
+        bar_fig.update_layout(
+            paper_bgcolor="white",
+            plot_bgcolor="white",
+            showlegend=False,
+            font=dict(
+                family="Plus Jakarta Sans",
+                color="#111"
+            ),
+            xaxis_title="Sentimen",
+            yaxis_title="Jumlah Data"
         )
+
+        st.plotly_chart(bar_fig, width="stretch")
+
+    # DATASET PREVIEW
+    st.subheader("Dataset Preview")
+
+    st.dataframe(
+        df[["full_text", "tweet_processed", "sentimen"]].head(20),
+        width="stretch"
     )
 
-    st.plotly_chart(bar_fig, width="stretch")
-
-
-# keluar dari colB
-st.subheader("Dataset Preview")
-
-st.dataframe(
-    df[["full_text", "tweet_processed", "sentimen"]].head(20),
-    width="stretch"
-)
-
 # =====================================
-# TAB 2
+# TAB 2 - VISUALISASI
 # =====================================
 with tab2:
 
     st.subheader("Confusion Matrix")
-    st.image("asset/cm.png")
+    st.image("asset/cm.png", width="stretch")
 
     st.subheader("WordCloud")
-    st.image("asset/wordcloud.png")
+    st.image("asset/wordcloud.png", width="stretch")
 
     st.subheader("Top Words")
-    st.image("asset/topwords.png")
+    st.image("asset/topwords.png", width="stretch")
 
     st.subheader("Decision Tree")
-    st.image("asset/decisiontree.png")
+    st.image("asset/decisiontree.png", width="stretch")
