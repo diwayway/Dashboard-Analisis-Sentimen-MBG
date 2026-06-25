@@ -53,15 +53,13 @@ html, body, [class*="css"] {
     color:white;
     box-shadow: 0px 8px 20px rgba(0,0,0,0.08);
     min-height:140px;
-    transition: all 0.3s ease;
+    transition:0.3s;
 }
 
 .metric-card:hover{
-    transform: translateY(-8px);
-    box-shadow: 0px 16px 30px rgba(0,0,0,0.12);
+    transform:translateY(-6px);
 }
 
-/* COLORS */
 .card-purple{
     background: linear-gradient(135deg,#914CD5,#B889F8);
 }
@@ -95,9 +93,18 @@ html, body, [class*="css"] {
     margin-top:15px;
 }
 
+/* INSIGHT BOX */
+.insight-box{
+    background:#F8F8F8;
+    padding:20px;
+    border-radius:20px;
+    border:1px solid #EEEEEE;
+    margin-top:20px;
+}
+
 /* TABS */
 .stTabs [data-baseweb="tab-list"]{
-    gap:20px;
+    gap: 20px;
 }
 
 .stTabs [data-baseweb="tab"]{
@@ -154,7 +161,7 @@ tab1, tab2, tab3 = st.tabs([
 ])
 
 # =====================================
-# TAB 1
+# TAB 1 - DATASET
 # =====================================
 with tab1:
 
@@ -188,6 +195,7 @@ with tab1:
 
     sentiment_count = df["sentimen"].value_counts()
 
+    # PIE CHART
     with colA:
         pie_fig = go.Figure(data=[go.Pie(
             labels=sentiment_count.index,
@@ -200,6 +208,7 @@ with tab1:
 
         st.plotly_chart(pie_fig, width="stretch")
 
+    # BAR CHART
     with colB:
         bar_fig = go.Figure(data=[go.Bar(
             x=sentiment_count.index,
@@ -217,7 +226,7 @@ with tab1:
     )
 
 # =====================================
-# TAB 2
+# TAB 2 - SMOTE
 # =====================================
 with tab2:
 
@@ -259,8 +268,22 @@ with tab2:
 
         st.plotly_chart(after_fig, width="stretch")
 
+    st.markdown("""
+    <div class="insight-box">
+        <h4>Insight Balancing Data</h4>
+        <p>
+        Sebelum dilakukan SMOTE, distribusi data menunjukkan ketidakseimbangan
+        antar kelas sentimen. Kelas netral mendominasi data, sedangkan kelas
+        positif memiliki jumlah paling sedikit. Setelah dilakukan SMOTE pada
+        data training, jumlah data tiap kelas berhasil diseimbangkan menjadi
+        1068 data per kelas sehingga model dapat belajar lebih optimal dan
+        mengurangi bias terhadap kelas mayoritas.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+
 # =====================================
-# TAB 3
+# TAB 3 - VISUALISASI
 # =====================================
 with tab3:
 
