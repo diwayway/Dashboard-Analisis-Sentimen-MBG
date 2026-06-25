@@ -292,13 +292,4 @@ with tab3:
     st.subheader("Decision Tree")
     st.image("asset/decisiontree.png", width=1000)
 
-    st.subheader("Insight Model")
-
-    st.markdown("""
-    <div class="insight-box">
-    Setelah dilakukan balancing menggunakan SMOTE, model Decision Tree 
-    berhasil mencapai akurasi sebesar <b>94.90%</b>. 
-    Hasil confusion matrix menunjukkan bahwa model mampu mengklasifikasikan 
-    sentimen negatif, netral, dan positif dengan performa yang baik dan stabil.
-    </div>
     """, unsafe_allow_html=True)
