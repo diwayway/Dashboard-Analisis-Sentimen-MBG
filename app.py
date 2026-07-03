@@ -99,9 +99,9 @@ html, body, [class*="css"] {
     padding:20px;
     border-radius:20px;
     border:1px solid #EEEEEE;
-    margin-top:10px;
+    margin-top:20px;
     color:#111;
-    line-height:1.7;
+    line-height:1.8;
     text-align:justify;
 }
 
@@ -202,21 +202,28 @@ with tab1:
         pie_fig = go.Figure(data=[go.Pie(
             labels=sentiment_count.index,
             values=sentiment_count.values,
-            hole=0.65
+            hole=0.65,
+            marker=dict(
+                colors=["#2FAF77", "#FF78A8", "#A9DBFF"]
+            )
         )])
-        st.plotly_chart(pie_fig, use_container_width=True)
+
+        st.plotly_chart(pie_fig, width="stretch")
 
     with colB:
         bar_fig = go.Figure(data=[go.Bar(
             x=sentiment_count.index,
-            y=sentiment_count.values
+            y=sentiment_count.values,
+            marker_color=["#2FAF77", "#FF78A8", "#A9DBFF"]
         )])
-        st.plotly_chart(bar_fig, use_container_width=True)
+
+        st.plotly_chart(bar_fig, width="stretch")
 
     st.subheader("Dataset Preview")
+
     st.dataframe(
         df[["full_text", "tweet_processed", "sentimen"]].head(20),
-        use_container_width=True
+        width="stretch"
     )
 
 # =====================================
@@ -242,15 +249,34 @@ with tab2:
 
     with col1:
         st.markdown("### Sebelum SMOTE")
-        st.bar_chart(before_smote)
+
+        before_fig = go.Figure(data=[go.Bar(
+            x=list(before_smote.keys()),
+            y=list(before_smote.values()),
+            marker_color=["#2FAF77", "#FF78A8", "#A9DBFF"]
+        )])
+
+        st.plotly_chart(before_fig, width="stretch")
 
     with col2:
         st.markdown("### Sesudah SMOTE")
-        st.bar_chart(after_smote)
+
+        after_fig = go.Figure(data=[go.Bar(
+            x=list(after_smote.keys()),
+            y=list(after_smote.values()),
+            marker_color=["#2FAF77", "#FF78A8", "#A9DBFF"]
+        )])
+
+        st.plotly_chart(after_fig, width="stretch")
 
     st.markdown("""
     <div class="insight-box">
-    Sebelum dilakukan SMOTE, distribusi data menunjukkan ketidakseimbangan antar kelas sentimen, di mana kelas netral mendominasi data, sedangkan kelas positif memiliki jumlah paling sedikit. Kondisi ini dapat menyebabkan model lebih cenderung mempelajari pola dari kelas mayoritas dan kurang optimal dalam mengenali kelas minoritas. Oleh karena itu, SMOTE digunakan pada data training untuk menambah data pada kelas yang jumlahnya lebih sedikit agar distribusi data menjadi lebih seimbang. Setelah proses SMOTE dilakukan, jumlah data pada masing-masing kelas menjadi 1068 data, sehingga distribusi data lebih seimbang dan model dapat belajar dengan lebih baik serta mengurangi bias terhadap kelas mayoritas.
+    Sebelum dilakukan SMOTE, distribusi data menunjukkan ketidakseimbangan antar kelas sentimen, di mana kelas netral mendominasi data, 
+    sedangkan kelas positif memiliki jumlah paling sedikit. Kondisi ini dapat menyebabkan model lebih cenderung mempelajari pola dari kelas 
+    mayoritas dan kurang optimal dalam mengenali kelas minoritas. Oleh karena itu, SMOTE digunakan pada data training untuk menambah data 
+    pada kelas yang jumlahnya lebih sedikit agar distribusi data menjadi lebih seimbang. Setelah proses SMOTE dilakukan, jumlah data pada 
+    masing-masing kelas menjadi 1068 data, sehingga distribusi data lebih seimbang dan model dapat belajar dengan lebih baik serta mengurangi 
+    bias terhadap kelas mayoritas.
     </div>
     """, unsafe_allow_html=True)
 
@@ -268,29 +294,66 @@ with tab3:
     </div>
     """, unsafe_allow_html=True)
 
-    visualizations = [
-        ("Confusion Matrix", "asset/cm.png", """Berdasarkan confusion matrix di atas, model Decision Tree yang telah melalui proses SMOTE menunjukkan hasil klasifikasi yang cukup baik pada ketiga kelas sentimen. Nilai pada diagonal utama menunjukkan jumlah prediksi yang benar, yaitu sebanyak 302 data untuk sentimen negatif, 437 data untuk sentimen netral, dan 173 data untuk sentimen positif."""),
-        
-        ("WordCloud", "asset/wordcloud.png", """Berdasarkan visualisasi wordcloud di atas, terlihat beberapa kata yang paling sering muncul dalam data tweet terkait Program Makan Bergizi Gratis (MBG), seperti “gizi”, “gratis”, “mbg”, “makan”, dan “program”."""),
-        
-        ("Top Words", "asset/topwords.png", """Berdasarkan grafik frekuensi kata di atas, terlihat bahwa kata “mbg”, “gizi”, “makan”, “gratis”, dan “program” menjadi kata yang paling sering muncul dalam dataset."""),
-        
-        ("Decision Tree", "asset/decisiontree.png", """Berdasarkan visualisasi Decision Tree di atas, proses klasifikasi dimulai dari node paling atas sebagai titik awal pengambilan keputusan. Pada node tersebut terdapat aturan x[603] <= 0.625 yang menunjukkan bahwa model menggunakan fitur ke-603 dari hasil word embedding IndoBERT.""")
-    ]
+    st.markdown("<br>", unsafe_allow_html=True)
 
-    for title, image_path, desc in visualizations:
-        st.subheader(title)
+    # CONFUSION MATRIX
+    st.subheader("Confusion Matrix")
+    col1, col2 = st.columns([2.2, 1])
 
-        col1, col2 = st.columns([2, 1])
+    with col1:
+        st.image("asset/cm.png", width=800)
 
-        with col1:
-            st.image(image_path, use_container_width=True)
+    with col2:
+        st.markdown("""
+        <div class="insight-box">
+        Berdasarkan confusion matrix di atas, model Decision Tree yang telah melalui proses SMOTE menunjukkan hasil klasifikasi yang cukup baik pada ketiga kelas sentimen...
+        </div>
+        """, unsafe_allow_html=True)
 
-        with col2:
-            st.markdown(f"""
-            <div class="insight-box">
-            {desc}
-            </div>
-            """, unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
 
-        st.markdown("<br>", unsafe_allow_html=True)
+    # WORDCLOUD
+    st.subheader("WordCloud")
+    col1, col2 = st.columns([2.2, 1])
+
+    with col1:
+        st.image("asset/wordcloud.png", width=800)
+
+    with col2:
+        st.markdown("""
+        <div class="insight-box">
+        Berdasarkan visualisasi wordcloud di atas, terlihat beberapa kata yang paling sering muncul dalam data tweet terkait Program Makan Bergizi Gratis (MBG), seperti “gizi”, “gratis”, “mbg”, “makan”, dan “program”. Ukuran kata yang lebih besar menunjukkan frekuensi kemunculan yang lebih tinggi dalam dataset. Visualisasi ini memberikan gambaran umum mengenai topik utama yang banyak dibahas masyarakat terkait program MBG.
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # TOP WORDS
+    st.subheader("Top Words")
+    col1, col2 = st.columns([2.2, 1])
+
+    with col1:
+        st.image("asset/topwords.png", width=800)
+
+    with col2:
+        st.markdown("""
+        <div class="insight-box">
+        Berdasarkan grafik frekuensi kata di atas, terlihat bahwa kata “mbg”, “gizi”, “makan”, “gratis”, dan “program” menjadi kata yang paling sering muncul dalam dataset. Visualisasi ini membantu memperlihatkan kata-kata dominan yang sering digunakan dalam opini masyarakat terkait program MBG.
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # DECISION TREE
+    st.subheader("Decision Tree")
+    col1, col2 = st.columns([2.5, 1])
+
+    with col1:
+        st.image("asset/decisiontree.png", width=1000)
+
+    with col2:
+        st.markdown("""
+        <div class="insight-box">
+        Berdasarkan visualisasi Decision Tree di atas, proses klasifikasi dimulai dari node paling atas sebagai titik awal pengambilan keputusan. Pada node tersebut terdapat aturan x[603] <= 0.625, yang menunjukkan bahwa model menggunakan fitur ke-603 dari hasil word embedding IndoBERT untuk membagi data. Nilai entropy sebesar 1.585 menunjukkan bahwa data pada node awal masih memiliki tingkat campuran yang tinggi. Semakin kecil nilai entropy, maka data pada node tersebut semakin seragam dan keputusan model menjadi lebih jelas. Nilai samples sebesar 3204 menunjukkan jumlah data yang diproses, sedangkan nilai value sebesar [1068, 1068, 1068] menunjukkan jumlah data pada masing-masing kelas sentimen, yaitu negatif, netral, dan positif yang telah diseimbangkan menggunakan SMOTE. Meskipun jumlah data pada ketiga kelas sama, nilai class ditampilkan sebagai negatif karena urutan kelas dimulai dari negatif, netral, lalu positif, sehingga kelas pertama dipilih sebagai kelas dominan. Percabangan pada bagian bawah merupakan lanjutan dari proses pembagian data sebelumnya dapat menentukan hasil klasifikasi sentimen akhir dengan lebih spesifik.
+        </div>
+        """, unsafe_allow_html=True)
