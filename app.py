@@ -368,7 +368,7 @@ with tab3:
         st.markdown("""
         <div class="insight-box">
         Berdasarkan visualisasi Decision Tree di atas, proses klasifikasi dimulai dari node paling atas sebagai titik awal 
-        pengambilan keputusan. Pada node tersebut terdapat aturan **x[603] <= 0.625**, yang menunjukkan bahwa model menggunakan 
+        pengambilan keputusan. Pada node tersebut terdapat aturan <b>x[603] <= 0.625</b>, yang menunjukkan bahwa model menggunakan 
         fitur ke-603 dari hasil *word embedding* IndoBERT untuk membagi data. Nilai *entropy* sebesar **1.585** menunjukkan bahwa 
         data pada node awal masih memiliki tingkat campuran yang tinggi. Semakin kecil nilai *entropy*, maka data pada node tersebut 
         semakin seragam dan keputusan model menjadi lebih jelas. Nilai *samples* sebesar **3204** menunjukkan jumlah data yang diproses, 
