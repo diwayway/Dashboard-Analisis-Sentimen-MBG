@@ -306,7 +306,7 @@ with tab3:
     with col2:
         st.markdown("""
         <div class="insight-box">
-        Berdasarkan confusion matrix di atas, model Decision Tree yang telah melalui proses SMOTE 
+        Berdasarkan confusion matrix di samping, model Decision Tree yang telah melalui proses SMOTE 
         menunjukkan hasil klasifikasi yang cukup baik pada ketiga kelas sentimen. Nilai pada diagonal 
         utama menunjukkan jumlah prediksi yang benar, yaitu sebanyak 302 data untuk sentimen negatif, 
         437 data untuk sentimen netral, dan 173 data untuk sentimen positif. Sementara itu, nilai di 
@@ -331,8 +331,10 @@ with tab3:
     with col2:
         st.markdown("""
         <div class="insight-box">
-        Berdasarkan visualisasi wordcloud di atas, terlihat beberapa kata yang paling sering muncul dalam data tweet terkait Program Makan Bergizi Gratis (MBG), seperti “gizi”, “gratis”, “mbg”, “makan”, dan “program”. Ukuran kata yang lebih besar menunjukkan frekuensi kemunculan yang lebih tinggi dalam dataset. Visualisasi ini memberikan gambaran umum mengenai topik utama yang banyak dibahas masyarakat terkait program MBG.
-        </div>
+        Berdasarkan visualisasi wordcloud di atas, terlihat beberapa kata yang paling sering muncul dalam data 
+        tweet terkait Program Makan Bergizi Gratis (MBG), seperti “gizi”, “gratis”, “mbg”, “makan”, dan “program”. 
+        Ukuran kata yang lebih besar menunjukkan frekuensi kemunculan yang lebih tinggi dalam dataset. Visualisasi 
+        ini memberikan gambaran umum mengenai topik utama yang banyak dibahas masyarakat terkait program MBG.
         """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
@@ -347,7 +349,9 @@ with tab3:
     with col2:
         st.markdown("""
         <div class="insight-box">
-        Berdasarkan grafik frekuensi kata di atas, terlihat bahwa kata “mbg”, “gizi”, “makan”, “gratis”, dan “program” menjadi kata yang paling sering muncul dalam dataset. Visualisasi ini membantu memperlihatkan kata-kata dominan yang sering digunakan dalam opini masyarakat terkait program MBG.
+        Berdasarkan grafik frekuensi kata di atas, terlihat bahwa kata “mbg”, “gizi”, “makan”, “gratis”, dan “program” 
+        menjadi kata yang paling sering muncul dalam dataset. Visualisasi ini membantu memperlihatkan kata-kata dominan 
+        yang sering digunakan dalam opini masyarakat terkait program MBG.
         </div>
         """, unsafe_allow_html=True)
 
@@ -363,6 +367,15 @@ with tab3:
     with col2:
         st.markdown("""
         <div class="insight-box">
-        Berdasarkan visualisasi Decision Tree di atas, proses klasifikasi dimulai dari node paling atas sebagai titik awal pengambilan keputusan. Pada node tersebut terdapat aturan x[603] <= 0.625, yang menunjukkan bahwa model menggunakan fitur ke-603 dari hasil word embedding IndoBERT untuk membagi data. Nilai entropy sebesar 1.585 menunjukkan bahwa data pada node awal masih memiliki tingkat campuran yang tinggi. Semakin kecil nilai entropy, maka data pada node tersebut semakin seragam dan keputusan model menjadi lebih jelas. Nilai samples sebesar 3204 menunjukkan jumlah data yang diproses, sedangkan nilai value sebesar [1068, 1068, 1068] menunjukkan jumlah data pada masing-masing kelas sentimen, yaitu negatif, netral, dan positif yang telah diseimbangkan menggunakan SMOTE. Meskipun jumlah data pada ketiga kelas sama, nilai class ditampilkan sebagai negatif karena urutan kelas dimulai dari negatif, netral, lalu positif, sehingga kelas pertama dipilih sebagai kelas dominan. Percabangan pada bagian bawah merupakan lanjutan dari proses pembagian data sebelumnya dapat menentukan hasil klasifikasi sentimen akhir dengan lebih spesifik.
+        Berdasarkan visualisasi Decision Tree di atas, proses klasifikasi dimulai dari node paling atas sebagai titik awal 
+        pengambilan keputusan. Pada node tersebut terdapat aturan **x[603] <= 0.625**, yang menunjukkan bahwa model menggunakan 
+        fitur ke-603 dari hasil *word embedding* IndoBERT untuk membagi data. Nilai *entropy* sebesar **1.585** menunjukkan bahwa 
+        data pada node awal masih memiliki tingkat campuran yang tinggi. Semakin kecil nilai *entropy*, maka data pada node tersebut 
+        semakin seragam dan keputusan model menjadi lebih jelas. Nilai *samples* sebesar **3204** menunjukkan jumlah data yang diproses, 
+        sedangkan nilai *value* sebesar **[1068, 1068, 1068]** menunjukkan jumlah data pada masing-masing kelas sentimen, yaitu negatif, 
+        netral, dan positif yang telah diseimbangkan menggunakan SMOTE. Meskipun jumlah data pada ketiga kelas sama, nilai *class* ditampilkan 
+        sebagai **negatif** karena urutan kelas dimulai dari negatif, netral, lalu positif, sehingga kelas pertama dipilih sebagai kelas dominan. 
+        Percabangan pada bagian bawah merupakan lanjutan dari proses pembagian data sebelumnya dapat menentukan hasil klasifikasi sentimen akhir 
+        dengan lebih spesifik.
         </div>
         """, unsafe_allow_html=True)
