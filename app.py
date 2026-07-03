@@ -306,7 +306,16 @@ with tab3:
     with col2:
         st.markdown("""
         <div class="insight-box">
-        Berdasarkan confusion matrix di atas, model Decision Tree yang telah melalui proses SMOTE menunjukkan hasil klasifikasi yang cukup baik pada ketiga kelas sentimen...
+        Berdasarkan confusion matrix di atas, model Decision Tree yang telah melalui proses SMOTE 
+        menunjukkan hasil klasifikasi yang cukup baik pada ketiga kelas sentimen. Nilai pada diagonal 
+        utama menunjukkan jumlah prediksi yang benar, yaitu sebanyak 302 data untuk sentimen negatif, 
+        437 data untuk sentimen netral, dan 173 data untuk sentimen positif. Sementara itu, nilai di 
+        luar diagonal menunjukkan kesalahan klasifikasi, seperti data negatif yang diprediksi sebagai 
+        netral sebanyak 11 data dan positif sebanyak 3 data. Pada kelas netral, terdapat 10 data yang 
+        diprediksi sebagai negatif dan 11 data sebagai positif. Sedangkan pada kelas positif, terdapat 
+        masing-masing 7 data yang salah diprediksi sebagai negatif dan netral. Hasil tersebut menunjukkan 
+        bahwa model mampu mengenali pola sentimen dengan cukup baik, terutama pada kelas netral yang memiliki 
+        jumlah prediksi benar paling tinggi, meskipun masih terdapat beberapa kesalahan klasifikasi antar kelas.
         </div>
         """, unsafe_allow_html=True)
 
