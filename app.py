@@ -331,7 +331,7 @@ with tab3:
     with col2:
         st.markdown("""
         <div class="insight-box">
-        Berdasarkan visualisasi wordcloud di atas, terlihat beberapa kata yang paling sering muncul dalam data 
+        Berdasarkan visualisasi wordcloud yang ditampilkan, terlihat beberapa kata yang paling sering muncul dalam data 
         tweet terkait Program Makan Bergizi Gratis (MBG), seperti “gizi”, “gratis”, “mbg”, “makan”, dan “program”. 
         Ukuran kata yang lebih besar menunjukkan frekuensi kemunculan yang lebih tinggi dalam dataset. Visualisasi 
         ini memberikan gambaran umum mengenai topik utama yang banyak dibahas masyarakat terkait program MBG.
@@ -349,7 +349,7 @@ with tab3:
     with col2:
         st.markdown("""
         <div class="insight-box">
-        Berdasarkan grafik frekuensi kata di atas, terlihat bahwa kata “mbg”, “gizi”, “makan”, “gratis”, dan “program” 
+        Berdasarkan grafik frekuensi kata di samping, terlihat bahwa kata “mbg”, “gizi”, “makan”, “gratis”, dan “program” 
         menjadi kata yang paling sering muncul dalam dataset. Visualisasi ini membantu memperlihatkan kata-kata dominan 
         yang sering digunakan dalam opini masyarakat terkait program MBG.
         </div>
@@ -367,7 +367,7 @@ with tab3:
     with col2:
         st.markdown("""
         <div class="insight-box">
-        Berdasarkan visualisasi Decision Tree di atas, proses klasifikasi dimulai dari node paling atas sebagai titik awal 
+        Berdasarkan visualisasi Decision Tree yang ditampilkan, proses klasifikasi dimulai dari node paling atas sebagai titik awal 
         pengambilan keputusan. Pada node tersebut terdapat aturan <b>x[603] <= 0.625</b>, yang menunjukkan bahwa model menggunakan 
         fitur ke-603 dari hasil <b>word embedding</b> IndoBERT untuk membagi data. Nilai <b>entropy</b> sebesar <b>1.585</b> menunjukkan bahwa 
         data pada node awal masih memiliki tingkat campuran yang tinggi. Semakin kecil nilai <b>entropy</b>, maka data pada node tersebut 
