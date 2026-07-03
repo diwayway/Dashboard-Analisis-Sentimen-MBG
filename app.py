@@ -369,12 +369,12 @@ with tab3:
         <div class="insight-box">
         Berdasarkan visualisasi Decision Tree di atas, proses klasifikasi dimulai dari node paling atas sebagai titik awal 
         pengambilan keputusan. Pada node tersebut terdapat aturan <b>x[603] <= 0.625</b>, yang menunjukkan bahwa model menggunakan 
-        fitur ke-603 dari hasil *word embedding* IndoBERT untuk membagi data. Nilai *entropy* sebesar **1.585** menunjukkan bahwa 
-        data pada node awal masih memiliki tingkat campuran yang tinggi. Semakin kecil nilai *entropy*, maka data pada node tersebut 
-        semakin seragam dan keputusan model menjadi lebih jelas. Nilai *samples* sebesar **3204** menunjukkan jumlah data yang diproses, 
-        sedangkan nilai *value* sebesar **[1068, 1068, 1068]** menunjukkan jumlah data pada masing-masing kelas sentimen, yaitu negatif, 
-        netral, dan positif yang telah diseimbangkan menggunakan SMOTE. Meskipun jumlah data pada ketiga kelas sama, nilai *class* ditampilkan 
-        sebagai **negatif** karena urutan kelas dimulai dari negatif, netral, lalu positif, sehingga kelas pertama dipilih sebagai kelas dominan. 
+        fitur ke-603 dari hasil <b>word embedding<b> IndoBERT untuk membagi data. Nilai <b>entropy<b> sebesar <b>1.585<b> menunjukkan bahwa 
+        data pada node awal masih memiliki tingkat campuran yang tinggi. Semakin kecil nilai <b>entropy<b>, maka data pada node tersebut 
+        semakin seragam dan keputusan model menjadi lebih jelas. Nilai <b>samples<b> sebesar <b>3204<b>menunjukkan jumlah data yang diproses, 
+        sedangkan nilai <b>value<b> sebesar <b>[1068, 1068, 1068]<b> menunjukkan jumlah data pada masing-masing kelas sentimen, yaitu negatif, 
+        netral, dan positif yang telah diseimbangkan menggunakan SMOTE. Meskipun jumlah data pada ketiga kelas sama, nilai <b>class<b> ditampilkan 
+        sebagai <b>negatif<b>karena urutan kelas dimulai dari negatif, netral, lalu positif, sehingga kelas pertama dipilih sebagai kelas dominan. 
         Percabangan pada bagian bawah merupakan lanjutan dari proses pembagian data sebelumnya dapat menentukan hasil klasifikasi sentimen akhir 
         dengan lebih spesifik.
         </div>
