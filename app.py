@@ -271,12 +271,12 @@ with tab2:
     st.markdown("""
     <div class="insight-box">
         <p>
-        Sebelum dilakukan SMOTE, distribusi data menunjukkan ketidakseimbangan
-        antar kelas sentimen. Kelas netral mendominasi data, sedangkan kelas
-        positif memiliki jumlah paling sedikit. Setelah dilakukan SMOTE pada
-        data training, jumlah data tiap kelas berhasil diseimbangkan menjadi
-        1068 data per kelas sehingga model dapat belajar lebih optimal dan
-        mengurangi bias terhadap kelas mayoritas.
+        Sebelum dilakukan SMOTE, distribusi data menunjukkan ketidakseimbangan antar kelas sentimen, di mana kelas netral mendominasi data, 
+        sedangkan kelas positif memiliki jumlah paling sedikit. Kondisi ini dapat menyebabkan model lebih cenderung mempelajari pola dari kelas 
+        mayoritas dan kurang optimal dalam mengenali kelas minoritas. Oleh karena itu, SMOTE digunakan pada data training untuk menambah data 
+        pada kelas yang jumlahnya lebih sedikit agar distribusi data menjadi lebih seimbang.. Setelah proses SMOTE dilakukan, jumlah data pada 
+        masing-masing kelas menjadi 1068 data, sehingga distribusi data lebih seimbang dan model dapat belajar dengan lebih baik serta mengurangi 
+        bias terhadap kelas mayoritas. 
         </p>
     </div>
     """, unsafe_allow_html=True)
