@@ -370,7 +370,7 @@ with tab3:
         Berdasarkan visualisasi Decision Tree di atas, proses klasifikasi dimulai dari node paling atas sebagai titik awal 
         pengambilan keputusan. Pada node tersebut terdapat aturan <b>x[603] <= 0.625</b>, yang menunjukkan bahwa model menggunakan 
         fitur ke-603 dari hasil <b>word embedding</b> IndoBERT untuk membagi data. Nilai <b>entropy</b> sebesar <b>1.585</b> menunjukkan bahwa 
-        data pada node awal masih memiliki tingkat campuran yang tinggi. Semakin kecil nilai <b>entropy<b>, maka data pada node tersebut 
+        data pada node awal masih memiliki tingkat campuran yang tinggi. Semakin kecil nilai <b>entropy</b>, maka data pada node tersebut 
         semakin seragam dan keputusan model menjadi lebih jelas. Nilai <b>samples</b> sebesar <b>3204</b> menunjukkan jumlah data yang diproses, 
         sedangkan nilai <b>value</b> sebesar <b>[1068, 1068, 1068]</b> menunjukkan jumlah data pada masing-masing kelas sentimen, yaitu negatif, 
         netral, dan positif yang telah diseimbangkan menggunakan SMOTE. Meskipun jumlah data pada ketiga kelas sama, nilai <b>class</b> ditampilkan 
