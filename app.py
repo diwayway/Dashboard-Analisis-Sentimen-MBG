@@ -172,24 +172,63 @@ with tab1:
 
     col1, col2, col3, col4 = st.columns(4)
 
-    cards = [
-        ("Total Data", total_data, "card-purple"),
-        ("Netral", netral, "card-green"),
-        ("Negatif", negatif, "card-pink"),
-        ("Positif", positif, "card-blue")
-    ]
+# TOTAL DATA
+with col1:
+    st.markdown(f"""
+    <div class="metric-card card-purple">
+        <div class="metric-title">Total Data</div>
+        <div class="metric-value">{total_data}</div>
+    </div>
+    """, unsafe_allow_html=True)
 
-    for col, (title, value, color) in zip(
-        [col1, col2, col3, col4], cards
-    ):
-        with col:
-            st.markdown(f"""
-            <div class="metric-card {color}">
-                <div class="metric-title">{title}</div>
-                <div class="metric-value">{value}</div>
-            </div>
-            """, unsafe_allow_html=True)
+# NETRAL
+with col2:
+    with st.expander(f"🟢 Netral ({netral})", expanded=False):
+        st.markdown(f"""
+        <div class="metric-card card-green">
+            <div class="metric-title">Netral</div>
+            <div class="metric-value">{netral}</div>
+        </div>
+        """, unsafe_allow_html=True)
 
+        st.write("""
+Sentimen **netral** menunjukkan opini masyarakat yang tidak secara jelas
+mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada
+kategori ini umumnya berupa informasi, berita, atau komentar yang tidak
+mengandung kecenderungan sentimen positif maupun negatif.
+        """)
+
+# NEGATIF
+with col3:
+    with st.expander(f"🔴 Negatif ({negatif})", expanded=False):
+        st.markdown(f"""
+        <div class="metric-card card-pink">
+            <div class="metric-title">Negatif</div>
+            <div class="metric-value">{negatif}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.write("""
+Sentimen **negatif** menunjukkan opini masyarakat yang berisi kritik,
+ketidakpuasan, penolakan, maupun tanggapan yang kurang mendukung terhadap
+Program Makan Bergizi Gratis (MBG).
+        """)
+
+# POSITIF
+with col4:
+    with st.expander(f"🔵 Positif ({positif})", expanded=False):
+        st.markdown(f"""
+        <div class="metric-card card-blue">
+            <div class="metric-title">Positif</div>
+            <div class="metric-value">{positif}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.write("""
+Sentimen **positif** menunjukkan opini masyarakat yang mendukung,
+mengapresiasi, atau memberikan tanggapan yang baik terhadap Program
+Makan Bergizi Gratis (MBG).
+        """)
     st.markdown("<br>", unsafe_allow_html=True)
 
     st.subheader("Distribusi Sentimen Dataset Asli")
