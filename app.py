@@ -192,25 +192,6 @@ with tab1:
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # =====================================
-# PENJELASAN KATEGORI SENTIMEN
-# =====================================
-
-with st.expander("Penjelasan Sentimen Netral"):
-    st.write("""
-Sentimen **netral** menunjukkan opini masyarakat yang tidak secara jelas mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan, atau komentar yang tidak mengandung kecenderungan sentimen positif maupun negatif.
-""")
-
-with st.expander("Penjelasan Sentimen Negatif"):
-    st.write("""
-Sentimen **negatif** menunjukkan opini masyarakat yang berisi kritik, penolakan, ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program Makan Bergizi Gratis (MBG).
-""")
-
-with st.expander("Penjelasan Sentimen Positif"):
-    st.write("""
-Sentimen **positif** menunjukkan opini masyarakat yang mendukung, mengapresiasi, atau memberikan tanggapan yang baik terhadap Program Makan Bergizi Gratis (MBG).
-""")
-
     st.subheader("Distribusi Sentimen Dataset Asli")
 
     colA, colB = st.columns(2)
