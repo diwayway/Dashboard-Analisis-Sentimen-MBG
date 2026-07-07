@@ -46,35 +46,25 @@ html, body, [class*="css"] {
     margin-bottom:30px;
 }
 
-/* CARD */
+/* CARD BASE STYLE */
 .metric-card{
     padding:22px;
     border-radius:24px;
     color:white;
     box-shadow: 0px 8px 20px rgba(0,0,0,0.08);
     min-height:140px;
-    transition:0.3s;
+    transition: 0.3s;
+    display: block;
 }
 
 .metric-card:hover{
     transform:translateY(-6px);
 }
 
-.card-purple{
-    background: linear-gradient(135deg,#914CD5,#B889F8);
-}
-
-.card-green{
-    background: linear-gradient(135deg,#1C7651,#2FAF77);
-}
-
-.card-pink{
-    background: linear-gradient(135deg,#FB3679,#FF78A8);
-}
-
-.card-blue{
-    background: linear-gradient(135deg,#7CC1F2,#A9DBFF);
-}
+.card-purple{ background: linear-gradient(135deg,#914CD5,#B889F8); }
+.card-green{ background: linear-gradient(135deg,#1C7651,#2FAF77); }
+.card-pink{ background: linear-gradient(135deg,#FB3679,#FF78A8); }
+.card-blue{ background: linear-gradient(135deg,#7CC1F2,#A9DBFF); }
 
 .card-white{
     background: linear-gradient(135deg,#FFFFFF,#F8F8F8);
@@ -91,6 +81,45 @@ html, body, [class*="css"] {
     font-size:40px;
     font-weight:700;
     margin-top:15px;
+}
+
+/* INTERACTIVE DROPDOWN CARD ESSENTIALS */
+details.metric-card {
+    list-style: none;
+}
+details.metric-card summary {
+    list-style: none;
+    outline: none;
+}
+details.metric-card summary::-webkit-details-marker {
+    display: none; /* Sembunyikan panah bawaan browser */
+}
+
+.card-summary-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+.card-caret {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+    opacity: 0.8;
+}
+
+details[open] .card-caret {
+    transform: rotate(180deg); /* Panah berputar saat dropdown terbuka */
+}
+
+.card-dropdown-content {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: justify;
 }
 
 /* INSIGHT BOX */
@@ -122,57 +151,6 @@ html, body, [class*="css"] {
     color:#FB3679;
     border-bottom:3px solid #FB3679;
 }
-
-/* CUSTOM EXPANDER */
-details.custom-expander {
-    border: 1px solid rgba(49, 51, 63, 0.2);
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin-bottom: 12px;
-    background-color: #FFFFFF;
-    transition: all 0.3s ease;
-}
-details.custom-expander summary {
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    list-style: none; /* Sembunyikan panah bawaan */
-    outline: none;
-}
-details.custom-expander summary::-webkit-details-marker {
-    display: none; /* Sembunyikan panah di Chrome/Safari */
-}
-details.custom-expander summary::before {
-    content: '›';
-    font-size: 24px;
-    margin-right: 12px;
-    transition: transform 0.3s;
-    color: #777;
-    line-height: 0.8;
-}
-details.custom-expander[open] summary::before {
-    transform: rotate(90deg);
-}
-.dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    margin-right: 10px;
-    display: inline-block;
-}
-.dot-netral { background: linear-gradient(135deg, #1C7651, #2FAF77); }
-.dot-negatif { background: linear-gradient(135deg, #FB3679, #FF78A8); }
-.dot-positif { background: linear-gradient(135deg, #7CC1F2, #A9DBFF); }
-
-.expander-content {
-    margin-top: 10px;
-    padding-left: 36px;
-    color: #111111;
-    line-height: 1.6;
-    text-align: justify;
-}
 </style>
 """
 
@@ -196,7 +174,7 @@ accuracy = 94.69
 # HEADER
 # =====================================
 st.markdown(
-    '<div class="main-title">Dashboard Analisis Sentimen MBG</div>',
+    '<div class="main-title">Dashboard Analimen Sentimen MBG</div>',
     unsafe_allow_html=True
 )
 
@@ -223,51 +201,73 @@ with tab1:
 
     col1, col2, col3, col4 = st.columns(4)
 
-    cards = [
-        ("Total Data", total_data, "card-purple"),
-        ("Netral", netral, "card-green"),
-        ("Negatif", negatif, "card-pink"),
-        ("Positif", positif, "card-blue")
-    ]
+    # 1. Total Data (Sifatnya statis, tidak bisa diklik)
+    with col1:
+        st.markdown(f"""
+        <div class="metric-card card-purple">
+            <div class="metric-title">Total Data</div>
+            <div class="metric-value">{total_data}</div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    for col, (title, value, color) in zip([col1, col2, col3, col4], cards):
-        with col:
-            st.markdown(f"""
-            <div class="metric-card {color}">
-                <div class="metric-title">{title}</div>
-                <div class="metric-value">{value}</div>
+    # 2. Netral (Dropdown Card)
+    with col2:
+        st.markdown(f"""
+        <details class="metric-card card-green">
+            <summary>
+                <div class="card-summary-layout">
+                    <div>
+                        <div class="metric-title">Netral</div>
+                        <div class="metric-value">{netral}</div>
+                    </div>
+                    <div class="card-caret">▼</div>
+                </div>
+            </summary>
+            <div class="card-dropdown-content">
+                Sentimen <b>netral</b> menunjukkan opini masyarakat yang tidak secara jelas mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan, atau komentar yang tidak mengandung kecenderungan sentimen positif maupun negatif.
             </div>
-            """, unsafe_allow_html=True)
+        </details>
+        """, unsafe_allow_html=True)
 
-    st.markdown("<br>", unsafe_allow_html=True)
+    # 3. Negatif (Dropdown Card)
+    with col3:
+        st.markdown(f"""
+        <details class="metric-card card-pink">
+            <summary>
+                <div class="card-summary-layout">
+                    <div>
+                        <div class="metric-title">Negatif</div>
+                        <div class="metric-value">{negatif}</div>
+                    </div>
+                    <div class="card-caret">▼</div>
+                </div>
+            </summary>
+            <div class="card-dropdown-content">
+                Sentimen <b>negatif</b> menunjukkan opini masyarakat yang berisi kritik, penolakan, ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program Makan Bergizi Gratis (MBG).
+            </div>
+        </details>
+        """, unsafe_allow_html=True)
 
-    # =====================================
-    # PENJELASAN KATEGORI SENTIMEN
-    # =====================================
+    # 4. Positif (Dropdown Card)
+    with col4:
+        st.markdown(f"""
+        <details class="metric-card card-blue">
+            <summary>
+                <div class="card-summary-layout">
+                    <div>
+                        <div class="metric-title">Positif</div>
+                        <div class="metric-value">{positif}</div>
+                    </div>
+                    <div class="card-caret">▼</div>
+                </div>
+            </summary>
+            <div class="card-dropdown-content">
+                Sentimen <b>positif</b> menunjukkan opini masyarakat yang mendukung, mengapresiasi, atau memberikan tanggapan yang baik terhadap Program Makan Bergizi Gratis (MBG).
+            </div>
+        </details>
+        """, unsafe_allow_html=True)
 
-    st.markdown("""
-    <details class="custom-expander">
-        <summary><span class="dot dot-netral"></span> Penjelasan Sentimen Netral</summary>
-        <div class="expander-content">
-            Sentimen <b>netral</b> menunjukkan opini masyarakat yang tidak secara jelas mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan, atau komentar yang tidak mengandung kecenderungan sentimen positif maupun negatif.
-        </div>
-    </details>
-
-    <details class="custom-expander">
-        <summary><span class="dot dot-negatif"></span> Penjelasan Sentimen Negatif</summary>
-        <div class="expander-content">
-            Sentimen <b>negatif</b> menunjukkan opini masyarakat yang berisi kritik, penolakan, ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program Makan Bergizi Gratis (MBG).
-        </div>
-    </details>
-
-    <details class="custom-expander">
-        <summary><span class="dot dot-positif"></span> Penjelasan Sentimen Positif</summary>
-        <div class="expander-content">
-            Sentimen <b>positif</b> menunjukkan opini masyarakat yang mendukung, mengapresiasi, atau memberikan tanggapan yang baik terhadap Program Makan Bergizi Gratis (MBG).
-        </div>
-    </details>
-    <br>
-    """, unsafe_allow_html=True)
+    st.markdown("<br><br>", unsafe_allow_html=True)
 
     st.subheader("Distribusi Sentimen Dataset Asli")
 
