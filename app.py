@@ -173,16 +173,34 @@ with tab1:
     col1, col2, col3, col4 = st.columns(4)
 
     cards = [
-        ("Total Data", total_data, "card-purple"),
-        ("Netral", netral, "card-green"),
-        ("Negatif", negatif, "card-pink"),
-        ("Positif", positif, "card-blue")
-    ]
+    ("Total Data", total_data, "card-purple", ""),
+    (
+        "Netral",
+        netral,
+        "card-green",
+        "Opini yang tidak secara jelas mendukung maupun menolak Program Makan Bergizi Gratis (MBG)."
+    ),
+    (
+        "Negatif",
+        negatif,
+        "card-pink",
+        "Opini yang berisi kritik, penolakan, atau ketidakpuasan terhadap Program Makan Bergizi Gratis (MBG)."
+    ),
+    (
+        "Positif",
+        positif,
+        "card-blue",
+        "Opini yang mendukung, mengapresiasi, atau memberikan tanggapan positif terhadap Program Makan Bergizi Gratis (MBG)."
+    )
+]
 
-    for col, (title, value, color) in zip(
-        [col1, col2, col3, col4], cards
-    ):
-        with col:
+for col, (title, value, color, info) in zip(
+    [col1, col2, col3, col4], cards
+):
+    with col:
+
+        if title == "Total Data":
+
             st.markdown(f"""
             <div class="metric-card {color}">
                 <div class="metric-title">{title}</div>
@@ -190,7 +208,32 @@ with tab1:
             </div>
             """, unsafe_allow_html=True)
 
-    st.markdown("<br>", unsafe_allow_html=True)
+        else:
+
+            st.markdown(f"""
+            <div class="metric-card {color}">
+
+                <div class="metric-header">
+
+                    <div class="metric-title">
+                        {title}
+                    </div>
+
+                    <div class="tooltip">
+                        ⓘ
+                        <span class="tooltiptext">
+                        {info}
+                        </span>
+                    </div>
+
+                </div>
+
+                <div class="metric-value">
+                    {value}
+                </div>
+
+            </div>
+            """, unsafe_allow_html=True)
 
     st.subheader("Distribusi Sentimen Dataset Asli")
 
