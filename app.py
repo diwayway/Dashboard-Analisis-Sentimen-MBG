@@ -93,43 +93,6 @@ html, body, [class*="css"] {
     margin-top:15px;
 }
 
-.metric-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.tooltip{
-    position:relative;
-    display:inline-block;
-    cursor:pointer;
-    font-size:18px;
-    font-weight:bold;
-    color:white;
-}
-
-.tooltip .tooltiptext{
-    visibility:hidden;
-    width:240px;
-    background:#ffffff;
-    color:#111111;
-    text-align:left;
-    border-radius:12px;
-    padding:12px;
-    position:absolute;
-    z-index:999;
-    top:30px;
-    right:0;
-    border:1px solid #EAEAEA;
-    box-shadow:0px 8px 20px rgba(0,0,0,0.15);
-    font-size:13px;
-    line-height:1.6;
-}
-
-.tooltip:hover .tooltiptext{
-    visibility:visible;
-}
-
 /* INSIGHT BOX */
 .insight-box{
     background:#F8F8F8;
@@ -210,65 +173,20 @@ with tab1:
     col1, col2, col3, col4 = st.columns(4)
 
     cards = [
-    ("Total Data", total_data, "card-purple", ""),
-    (
-        "Netral",
-        netral,
-        "card-green",
-        "Opini yang tidak secara jelas mendukung maupun menolak Program Makan Bergizi Gratis (MBG)."
-    ),
-    (
-        "Negatif",
-        negatif,
-        "card-pink",
-        "Opini yang berisi kritik, penolakan, atau ketidakpuasan terhadap Program Makan Bergizi Gratis (MBG)."
-    ),
-    (
-        "Positif",
-        positif,
-        "card-blue",
-        "Opini yang mendukung, mengapresiasi, atau memberikan tanggapan positif terhadap Program Makan Bergizi Gratis (MBG)."
-    )
-]
+        ("Total Data", total_data, "card-purple"),
+        ("Netral", netral, "card-green"),
+        ("Negatif", negatif, "card-pink"),
+        ("Positif", positif, "card-blue")
+    ]
 
-    for col, (title, value, color, info) in zip(
-    [col1, col2, col3, col4], cards
-):
-    with col:
-
-        if title == "Total Data":
-
+    for col, (title, value, color) in zip(
+        [col1, col2, col3, col4], cards
+    ):
+        with col:
             st.markdown(f"""
             <div class="metric-card {color}">
                 <div class="metric-title">{title}</div>
                 <div class="metric-value">{value}</div>
-            </div>
-            """, unsafe_allow_html=True)
-
-        else:
-
-            st.markdown(f"""
-            <div class="metric-card {color}">
-
-                <div class="metric-header">
-
-                    <div class="metric-title">
-                        {title}
-                    </div>
-
-                    <div class="tooltip">
-                        ⓘ
-                        <span class="tooltiptext">
-                        {info}
-                        </span>
-                    </div>
-
-                </div>
-
-                <div class="metric-value">
-                    {value}
-                </div>
-
             </div>
             """, unsafe_allow_html=True)
 
