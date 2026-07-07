@@ -170,52 +170,46 @@ with tab1:
 
     st.subheader("Dataset Overview")
 
-col1, col2, col3, col4 = st.columns(4)
+    col1, col2, col3, col4 = st.columns(4)
 
-cards = [
-    ("Total Data", total_data, "card-purple"),
-    ("Netral", netral, "card-green"),
-    ("Negatif", negatif, "card-pink"),
-    ("Positif", positif, "card-blue")
-]
+    cards = [
+        ("Total Data", total_data, "card-purple"),
+        ("Netral", netral, "card-green"),
+        ("Negatif", negatif, "card-pink"),
+        ("Positif", positif, "card-blue")
+    ]
 
-for col, (title, value, color) in zip(
-    [col1, col2, col3, col4], cards
-):
-    with col:
-        st.markdown(f"""
-        <div class="metric-card {color}">
-            <div class="metric-title">{title}</div>
-            <div class="metric-value">{value}</div>
-        </div>
-        """, unsafe_allow_html=True)
+    for col, (title, value, color) in zip([col1, col2, col3, col4], cards):
+        with col:
+            st.markdown(f"""
+            <div class="metric-card {color}">
+                <div class="metric-title">{title}</div>
+                <div class="metric-value">{value}</div>
+            </div>
+            """, unsafe_allow_html=True)
 
-st.markdown("<br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
 
-# =====================================
-# PENJELASAN KATEGORI SENTIMEN
-# =====================================
+    # =====================================
+    # PENJELASAN KATEGORI SENTIMEN
+    # =====================================
 
-with st.expander("🟢 Penjelasan Sentimen Netral"):
-    st.write("""
-Sentimen **netral** menunjukkan opini masyarakat yang tidak secara jelas mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan, atau komentar yang tidak mengandung kecenderungan sentimen positif maupun negatif.
-""")
+    with st.expander("🟢 Penjelasan Sentimen Netral"):
+        st.write("""
+        Sentimen **netral** menunjukkan opini masyarakat yang tidak secara jelas mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan, atau komentar yang tidak mengandung kecenderungan sentimen positif maupun negatif.
+        """)
 
-with st.expander("🔴 Penjelasan Sentimen Negatif"):
-    st.write("""
-Sentimen **negatif** menunjukkan opini masyarakat yang berisi kritik, penolakan, ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program Makan Bergizi Gratis (MBG).
-""")
+    with st.expander("🔴 Penjelasan Sentimen Negatif"):
+        st.write("""
+        Sentimen **negatif** menunjukkan opini masyarakat yang berisi kritik, penolakan, ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program Makan Bergizi Gratis (MBG).
+        """)
 
-with st.expander("🔵 Penjelasan Sentimen Positif"):
-    st.write("""
-Sentimen **positif** menunjukkan opini masyarakat yang mendukung, mengapresiasi, atau memberikan tanggapan yang baik terhadap Program Makan Bergizi Gratis (MBG).
-""")
+    with st.expander("🔵 Penjelasan Sentimen Positif"):
+        st.write("""
+        Sentimen **positif** menunjukkan opini masyarakat yang mendukung, mengapresiasi, atau memberikan tanggapan yang baik terhadap Program Makan Bergizi Gratis (MBG).
+        """)
 
-st.markdown("<br>", unsafe_allow_html=True)
-
-st.subheader("Distribusi Sentimen Dataset Asli")
-
-st.subheader("Distribusi Sentimen Dataset Asli")
+    st.markdown("<br>", unsafe_allow_html=True)
 
     st.subheader("Distribusi Sentimen Dataset Asli")
 
@@ -232,7 +226,6 @@ st.subheader("Distribusi Sentimen Dataset Asli")
                 colors=["#2FAF77", "#FF78A8", "#A9DBFF"]
             )
         )])
-
         st.plotly_chart(pie_fig, width="stretch")
 
     with colB:
@@ -241,7 +234,6 @@ st.subheader("Distribusi Sentimen Dataset Asli")
             y=sentiment_count.values,
             marker_color=["#2FAF77", "#FF78A8", "#A9DBFF"]
         )])
-
         st.plotly_chart(bar_fig, width="stretch")
 
     st.subheader("Dataset Preview")
@@ -360,6 +352,7 @@ with tab3:
         tweet terkait Program Makan Bergizi Gratis (MBG), seperti “gizi”, “gratis”, “mbg”, “makan”, dan “program”. 
         Ukuran kata yang lebih besar menunjukkan frekuensi kemunculan yang lebih tinggi dalam dataset. Visualisasi 
         ini memberikan gambaran umum mengenai topik utama yang banyak dibahas masyarakat terkait program MBG.
+        </div>
         """, unsafe_allow_html=True)
 
     st.markdown("<br>", unsafe_allow_html=True)
