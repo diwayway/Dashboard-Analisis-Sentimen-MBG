@@ -192,6 +192,50 @@ with tab1:
 
     st.markdown("<br>", unsafe_allow_html=True)
 
+    for col, (title, value, color) in zip(
+    [col1, col2, col3, col4], cards
+):
+    with col:
+        st.markdown(f"""
+        <div class="metric-card {color}">
+            <div class="metric-title">{title}</div>
+            <div class="metric-value">{value}</div>
+        </div>
+        """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+# =====================================
+# PENJELASAN KATEGORI SENTIMEN
+# =====================================
+
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.info("""
+**🟢 Sentimen Netral**
+
+Opini masyarakat yang tidak secara jelas mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada kategori ini umumnya berupa penyampaian informasi, berita, atau pertanyaan tanpa kecenderungan sentimen tertentu.
+""")
+
+with col2:
+    st.error("""
+**🔴 Sentimen Negatif**
+
+Opini masyarakat yang berisi kritik, penolakan, ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program Makan Bergizi Gratis (MBG).
+""")
+
+with col3:
+    st.success("""
+**🔵 Sentimen Positif**
+
+Opini masyarakat yang mendukung, mengapresiasi, atau memberikan tanggapan yang baik terhadap Program Makan Bergizi Gratis (MBG).
+""")
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+st.subheader("Distribusi Sentimen Dataset Asli")
+
     st.subheader("Distribusi Sentimen Dataset Asli")
 
     colA, colB = st.columns(2)
