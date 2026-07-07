@@ -122,6 +122,57 @@ html, body, [class*="css"] {
     color:#FB3679;
     border-bottom:3px solid #FB3679;
 }
+
+/* CUSTOM EXPANDER */
+details.custom-expander {
+    border: 1px solid rgba(49, 51, 63, 0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    background-color: #FFFFFF;
+    transition: all 0.3s ease;
+}
+details.custom-expander summary {
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    list-style: none; /* Sembunyikan panah bawaan */
+    outline: none;
+}
+details.custom-expander summary::-webkit-details-marker {
+    display: none; /* Sembunyikan panah di Chrome/Safari */
+}
+details.custom-expander summary::before {
+    content: '›';
+    font-size: 24px;
+    margin-right: 12px;
+    transition: transform 0.3s;
+    color: #777;
+    line-height: 0.8;
+}
+details.custom-expander[open] summary::before {
+    transform: rotate(90deg);
+}
+.dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: inline-block;
+}
+.dot-netral { background: linear-gradient(135deg, #1C7651, #2FAF77); }
+.dot-negatif { background: linear-gradient(135deg, #FB3679, #FF78A8); }
+.dot-positif { background: linear-gradient(135deg, #7CC1F2, #A9DBFF); }
+
+.expander-content {
+    margin-top: 10px;
+    padding-left: 36px;
+    color: #111111;
+    line-height: 1.6;
+    text-align: justify;
+}
 </style>
 """
 
@@ -194,22 +245,29 @@ with tab1:
     # PENJELASAN KATEGORI SENTIMEN
     # =====================================
 
-    with st.expander("🟢 Penjelasan Sentimen Netral"):
-        st.write("""
-        Sentimen **netral** menunjukkan opini masyarakat yang tidak secara jelas mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan, atau komentar yang tidak mengandung kecenderungan sentimen positif maupun negatif.
-        """)
+    st.markdown("""
+    <details class="custom-expander">
+        <summary><span class="dot dot-netral"></span> Penjelasan Sentimen Netral</summary>
+        <div class="expander-content">
+            Sentimen <b>netral</b> menunjukkan opini masyarakat yang tidak secara jelas mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan, atau komentar yang tidak mengandung kecenderungan sentimen positif maupun negatif.
+        </div>
+    </details>
 
-    with st.expander("🔴 Penjelasan Sentimen Negatif"):
-        st.write("""
-        Sentimen **negatif** menunjukkan opini masyarakat yang berisi kritik, penolakan, ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program Makan Bergizi Gratis (MBG).
-        """)
+    <details class="custom-expander">
+        <summary><span class="dot dot-negatif"></span> Penjelasan Sentimen Negatif</summary>
+        <div class="expander-content">
+            Sentimen <b>negatif</b> menunjukkan opini masyarakat yang berisi kritik, penolakan, ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program Makan Bergizi Gratis (MBG).
+        </div>
+    </details>
 
-    with st.expander("🔵 Penjelasan Sentimen Positif"):
-        st.write("""
-        Sentimen **positif** menunjukkan opini masyarakat yang mendukung, mengapresiasi, atau memberikan tanggapan yang baik terhadap Program Makan Bergizi Gratis (MBG).
-        """)
-
-    st.markdown("<br>", unsafe_allow_html=True)
+    <details class="custom-expander">
+        <summary><span class="dot dot-positif"></span> Penjelasan Sentimen Positif</summary>
+        <div class="expander-content">
+            Sentimen <b>positif</b> menunjukkan opini masyarakat yang mendukung, mengapresiasi, atau memberikan tanggapan yang baik terhadap Program Makan Bergizi Gratis (MBG).
+        </div>
+    </details>
+    <br>
+    """, unsafe_allow_html=True)
 
     st.subheader("Distribusi Sentimen Dataset Asli")
 
