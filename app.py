@@ -346,7 +346,7 @@ with tab2:
 
     st.markdown("""
     <div class="insight-box">
-    Sebelum dilakukan SMOTE, data training hasil proses train-test split dengan rasio 80:20 menunjukkan distribusi kelas yang tidak seimbang, 
+    Sebelum dilakukan SMOTE, data training hasil proses split data dengan rasio 80:20 menunjukkan distribusi kelas yang tidak seimbang, 
     yaitu sebanyak 1221 data pada kelas netral, 843 data pada kelas negatif, dan 498 data pada kelas positif. Kondisi ini dapat menyebabkan model 
     lebih cenderung mempelajari pola dari kelas mayoritas sehingga kurang optimal dalam mengenali kelas minoritas. Oleh karena itu, metode SMOTE 
     diterapkan hanya pada data training untuk menambah jumlah data pada kelas yang memiliki jumlah lebih sedikit agar distribusi kelas menjadi lebih seimbang. 
