@@ -382,13 +382,13 @@ with tab3:
     with col2:
         st.markdown("""
         <div class="insight-box">
-        Berdasarkan confusion matrix di samping, model Decision Tree yang telah melalui proses SMOTE mampu melakukan klasifikasi 
-        dengan sangat baik pada ketiga kelas sentimen. Nilai pada diagonal utama menunjukkan jumlah prediksi yang benar, yaitu sebanyak 
-        205 data pada kelas negatif, 289 data pada kelas netral, dan 120 data pada kelas positif. Sementara itu, masih terdapat beberapa 
-        kesalahan klasifikasi. Pada kelas negatif, sebanyak 5 data diprediksi sebagai netral dan 1 data diprediksi sebagai positif. 
-        Pada kelas netral, terdapat 6 data yang diprediksi sebagai negatif dan 10 data diprediksi sebagai positif. Adapun pada kelas positif, 
-        terdapat 1 data yang diprediksi sebagai negatif dan 4 data diprediksi sebagai netral. Hasil tersebut menunjukkan bahwa sebagian besar 
-        data berhasil diklasifikasikan dengan benar sehingga model memiliki kemampuan yang baik dalam membedakan ketiga kelas sentimen.
+        Berdasarkan confusion matrix di samping, model Decision Tree yang telah melalui proses SMOTE mampu melakukan klasifikasi dengan sangat 
+        baik pada ketiga kelas sentimen. Nilai pada diagonal utama menunjukkan jumlah prediksi yang benar, yaitu sebanyak 302 data pada kelas negatif, 
+        437 data pada kelas netral, dan 173 data pada kelas positif. Sementara itu, masih terdapat beberapa kesalahan klasifikasi. Pada kelas negatif, 
+        sebanyak 11 data diprediksi sebagai netral dan 3 data diprediksi sebagai positif. Pada kelas netral, terdapat 10 data yang diprediksi sebagai 
+        negatif dan 11 data diprediksi sebagai positif. Adapun pada kelas positif, terdapat masing-masing 7 data yang diprediksi sebagai negatif dan netral. 
+        Hasil tersebut menunjukkan bahwa sebagian besar data berhasil diklasifikasikan dengan benar sehingga model memiliki kemampuan yang baik dalam 
+        membedakan ketiga kelas sentimen.
         </div>
         """, unsafe_allow_html=True)
 
@@ -441,18 +441,16 @@ with tab3:
     with col2:
         st.markdown("""
         <div class="insight-box">
-        <div class="insight-box">
-        Berdasarkan visualisasi <b>Decision Tree</b> yang ditampilkan, proses klasifikasi dimulai dari <b>node akar (root node)</b> 
-        sebagai titik awal pengambilan keputusan. Pada node tersebut terdapat aturan <b>x[364] ≤ 0.882</b>, yang menunjukkan bahwa model 
-        menggunakan <b>fitur ke-364</b> hasil <b>feature extraction</b> menggunakan <b>IndoBERT Embedding</b> sebagai dasar pemisahan data. 
-        Nilai <b>entropy</b> sebesar <b>1.585</b> menunjukkan bahwa distribusi kelas pada node awal masih bercampur sehingga proses pemisahan 
-        data masih perlu dilakukan pada percabangan berikutnya. Sementara itu, nilai <b>samples</b> sebesar <b>3663</b> menunjukkan jumlah data latih 
-        yang digunakan dalam proses pembentukan Decision Tree setelah melalui proses <b>oversampling</b> menggunakan metode <b>SMOTE</b>. Jumlah tersebut 
-        lebih besar dibandingkan jumlah data latih awal sebanyak <b>2562</b> data karena kelas minoritas telah ditambahkan hingga seluruh kelas memiliki 
-        jumlah data yang sama. Hal tersebut ditunjukkan oleh nilai <b>value = [1221, 1221, 1221]</b>, yang menyatakan bahwa masing-masing kelas sentimen, 
-        yaitu <b>negatif</b>, <b>netral</b>, dan <b>positif</b>, masing-masing memiliki <b>1221</b> data setelah proses SMOTE. Meskipun distribusi 
-        ketiga kelas telah seimbang, nilai <b>class = Negatif</b> ditampilkan karena kelas negatif merupakan kelas pertama berdasarkan urutan label 
-        yang digunakan oleh model. Selanjutnya, setiap percabangan akan memisahkan data berdasarkan nilai fitur tertentu hingga mencapai <b>node akhir (leaf node)</b>, 
-        yang digunakan sebagai dasar dalam menentukan hasil klasifikasi sentimen.
+        Berdasarkan visualisasi <b>Decision Tree</b> yang ditampilkan, proses klasifikasi dimulai dari <b>node akar (root node)</b> sebagai titik 
+        awal pengambilan keputusan. Pada node tersebut terdapat aturan <b>x[603] ≤ 0.625</b>, yang menunjukkan bahwa model menggunakan <b>fitur ke-603</b> 
+        hasil <b>feature extraction</b> menggunakan <b>IndoBERT Embedding</b> sebagai dasar pemisahan data. Nilai <b>entropy</b> sebesar <b>1.585</b> menunjukkan 
+        bahwa distribusi kelas pada node awal masih bercampur sehingga proses pemisahan data masih perlu dilakukan pada percabangan berikutnya. Sementara itu, nilai 
+        <b>samples</b> sebesar <b>3204</b> menunjukkan jumlah data latih yang digunakan dalam proses pembentukan Decision Tree setelah melalui proses <b>oversampling</b> 
+        menggunakan metode <b>SMOTE</b>. Jumlah tersebut lebih besar dibandingkan jumlah data latih awal sebanyak <b>2242</b> data karena kelas minoritas telah 
+        ditambahkan hingga seluruh kelas memiliki jumlah yang sama. Hal tersebut ditunjukkan oleh nilai <b>value = [1068, 1068, 1068]</b>, yang menyatakan bahwa 
+        masing-masing kelas sentimen, yaitu <b>negatif</b>, <b>netral</b>, dan <b>positif</b>, masing-masing memiliki <b>1068</b> data setelah proses SMOTE. Meskipun 
+        distribusi ketiga kelas telah seimbang, nilai <b>class = Negatif</b> ditampilkan karena kelas negatif merupakan kelas pertama berdasarkan urutan label yang digunakan 
+        oleh model. Selanjutnya, setiap percabangan akan memisahkan data berdasarkan nilai fitur tertentu hingga mencapai <b>node akhir (leaf node)</b>, yang digunakan sebagai 
+        dasar dalam menentukan hasil klasifikasi sentimen.
         </div>
         """, unsafe_allow_html=True)
