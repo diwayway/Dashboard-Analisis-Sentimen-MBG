@@ -168,7 +168,7 @@ total_data = len(df)
 netral = len(df[df["sentimen"] == "netral"])
 negatif = len(df[df["sentimen"] == "negatif"])
 positif = len(df[df["sentimen"] == "positif"])
-accuracy = 94.90
+accuracy = 94.38
 
 # =====================================
 # HEADER
