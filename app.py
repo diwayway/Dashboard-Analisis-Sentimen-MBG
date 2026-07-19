@@ -309,15 +309,15 @@ with tab2:
     st.subheader("Distribusi Data Sebelum dan Sesudah SMOTE")
 
     before_smote = {
-        "Netral":1068,
-        "Negatif":738,
+        "Netral":1065,
+        "Negatif":741,
         "Positif":436
     }
 
     after_smote = {
-        "Netral":1068,
-        "Negatif":1068,
-        "Positif":1068
+        "Netral":1065,
+        "Negatif":1065,
+        "Positif":1065
     }
 
     col1, col2 = st.columns(2)
@@ -347,12 +347,19 @@ with tab2:
     st.markdown("""
     <div class="insight-box">
     Sebelum dilakukan SMOTE, data training hasil proses split data dengan rasio 70:30 menunjukkan distribusi kelas yang tidak seimbang, 
-    yaitu sebanyak 1068 data pada kelas netral, 738 data pada kelas negatif, dan 436 data pada kelas positif. Kondisi ini dapat menyebabkan 
+    yaitu sebanyak 1065 data pada kelas netral, 741 data pada kelas negatif, dan 436 data pada kelas positif. Kondisi ini dapat menyebabkan 
     model lebih cenderung mempelajari pola dari kelas mayoritas sehingga kurang optimal dalam mengenali kelas minoritas. Oleh karena itu, 
     metode SMOTE diterapkan hanya pada data training untuk menambah jumlah data pada kelas yang memiliki jumlah lebih sedikit agar distribusi 
-    kelas menjadi lebih seimbang. Setelah proses SMOTE dilakukan, jumlah data pada masing-masing kelas menjadi 1068 data sehingga total data 
-    training meningkat menjadi 3204 data. Dengan distribusi kelas yang seimbang, model dapat mempelajari pola dari setiap kelas secara lebih 
+    kelas menjadi lebih seimbang. Setelah proses SMOTE dilakukan, jumlah data pada masing-masing kelas menjadi 1065 data sehingga total data 
+    training meningkat menjadi 3195 data. Dengan distribusi kelas yang seimbang, model dapat mempelajari pola dari setiap kelas secara lebih 
     proporsional serta mengurangi bias terhadap kelas mayoritas.
+
+    Sebelum dilakukan SMOTE, data training hasil pembagian data dengan rasio 70:30 menunjukkan distribusi kelas yang tidak seimbang, yaitu sebanyak
+    1065 data pada kelas netral, 741 data pada kelas negatif, dan 436 data pada kelas positif. Kondisi ini berpotensi menyebabkan model lebih cenderung 
+    mempelajari pola dari kelas mayoritas sehingga kemampuan dalam mengklasifikasikan kelas minoritas menjadi kurang optimal. Oleh karena itu, metode SMOTE 
+    diterapkan hanya pada data training untuk menghasilkan data sintetis pada kelas minoritas hingga jumlah setiap kelas menjadi seimbang. Setelah proses SMOTE dilakukan, 
+    jumlah data pada masing-masing kelas menjadi 1065 data sehingga total data training meningkat menjadi 3195 data. Dengan distribusi kelas yang seimbang, model diharapkan 
+    dapat mempelajari karakteristik setiap kelas secara lebih proporsional serta mengurangi kecenderungan bias terhadap kelas mayoritas.
     </div>
     """, unsafe_allow_html=True)
 
@@ -383,10 +390,10 @@ with tab3:
         st.markdown("""
         <div class="insight-box">
         Berdasarkan confusion matrix di samping, model Decision Tree yang telah melalui proses SMOTE mampu melakukan klasifikasi dengan sangat 
-        baik pada ketiga kelas sentimen. Nilai pada diagonal utama menunjukkan jumlah prediksi yang benar, yaitu sebanyak 302 data pada kelas negatif, 
-        437 data pada kelas netral, dan 173 data pada kelas positif. Sementara itu, masih terdapat beberapa kesalahan klasifikasi. Pada kelas negatif, 
-        sebanyak 11 data diprediksi sebagai netral dan 3 data diprediksi sebagai positif. Pada kelas netral, terdapat 10 data yang diprediksi sebagai 
-        negatif dan 11 data diprediksi sebagai positif. Adapun pada kelas positif, terdapat masing-masing 7 data yang diprediksi sebagai negatif dan netral. 
+        baik pada ketiga kelas sentimen. Nilai pada diagonal utama menunjukkan jumlah prediksi yang benar, yaitu sebanyak 301 data pada kelas negatif, 
+        435 data pada kelas netral, dan 171 data pada kelas positif. Sementara itu, masih terdapat beberapa kesalahan klasifikasi. Pada kelas negatif, 
+        sebanyak 14 data diprediksi sebagai netral dan 2 data diprediksi sebagai positif. Pada kelas netral, terdapat 8 data yang diprediksi sebagai 
+        negatif dan 14 data yang diprediksi sebagai positif. Adapun pada kelas positif, terdapat 7 data yang diprediksi sebagai negatif dan 9 data yang diprediksi sebagai netral. 
         Hasil tersebut menunjukkan bahwa sebagian besar data berhasil diklasifikasikan dengan benar sehingga model memiliki kemampuan yang baik dalam 
         membedakan ketiga kelas sentimen.
         </div>
@@ -405,7 +412,7 @@ with tab3:
         st.markdown("""
         <div class="insight-box">
         Berdasarkan visualisasi wordcloud yang ditampilkan, terlihat beberapa kata yang paling sering muncul dalam data 
-        tweet terkait Program Makan Bergizi Gratis (MBG), seperti “gizi”, “gratis”, “mbg”, “makan”, dan “program”. 
+        tweet terkait Program Makan Bergizi Gratis (MBG), seperti “makan”, “gizi”, “gratis”, “mbg”, dan “program”. 
         Ukuran kata yang lebih besar menunjukkan frekuensi kemunculan yang lebih tinggi dalam dataset. Visualisasi 
         ini memberikan gambaran umum mengenai topik utama yang banyak dibahas masyarakat terkait program MBG.
         </div>
@@ -425,7 +432,7 @@ with tab3:
         <div class="insight-box">
         Berdasarkan grafik frekuensi kata di samping, terlihat bahwa kata “mbg”, “gizi”, “makan”, “gratis”, dan “program” 
         menjadi kata yang paling sering muncul dalam dataset. Visualisasi ini membantu memperlihatkan kata-kata dominan 
-        yang sering digunakan dalam opini masyarakat terkait program MBG.
+        yang sering digunakan dalam opini masyarakat terkait Program Makan Bergizi Gratis (MBG).
         </div>
         """, unsafe_allow_html=True)
 
@@ -442,13 +449,13 @@ with tab3:
         st.markdown("""
         <div class="insight-box">
         Berdasarkan visualisasi <b>Decision Tree</b> yang ditampilkan, proses klasifikasi dimulai dari <b>node akar (root node)</b> sebagai titik 
-        awal pengambilan keputusan. Pada node tersebut terdapat aturan <b>x[603] ≤ 0.625</b>, yang menunjukkan bahwa model menggunakan <b>fitur ke-603</b> 
+        awal pengambilan keputusan. Pada node tersebut terdapat aturan <b>x[603] ≤ 0.698</b>, yang menunjukkan bahwa model menggunakan <b>fitur ke-603</b> 
         hasil <b>feature extraction</b> menggunakan <b>IndoBERT Embedding</b> sebagai dasar pemisahan data. Nilai <b>entropy</b> sebesar <b>1.585</b> menunjukkan 
         bahwa distribusi kelas pada node awal masih bercampur sehingga proses pemisahan data masih perlu dilakukan pada percabangan berikutnya. Sementara itu, nilai 
-        <b>samples</b> sebesar <b>3204</b> menunjukkan jumlah data latih yang digunakan dalam proses pembentukan Decision Tree setelah melalui proses <b>oversampling</b> 
+        <b>samples</b> sebesar <b>3195</b> menunjukkan jumlah data latih yang digunakan dalam proses pembentukan Decision Tree setelah melalui proses <b>oversampling</b> 
         menggunakan metode <b>SMOTE</b>. Jumlah tersebut lebih besar dibandingkan jumlah data latih awal sebanyak <b>2242</b> data karena kelas minoritas telah 
-        ditambahkan hingga seluruh kelas memiliki jumlah yang sama. Hal tersebut ditunjukkan oleh nilai <b>value = [1068, 1068, 1068]</b>, yang menyatakan bahwa 
-        masing-masing kelas sentimen, yaitu <b>negatif</b>, <b>netral</b>, dan <b>positif</b>, masing-masing memiliki <b>1068</b> data setelah proses SMOTE. Meskipun 
+        ditambahkan hingga seluruh kelas memiliki jumlah yang sama. Hal tersebut ditunjukkan oleh nilai <b>value = [1065, 1065, 1065]</b>, yang menyatakan bahwa 
+        masing-masing kelas sentimen, yaitu <b>negatif</b>, <b>netral</b>, dan <b>positif</b>, masing-masing memiliki <b>1065</b> data setelah proses SMOTE. Meskipun 
         distribusi ketiga kelas telah seimbang, nilai <b>class = Negatif</b> ditampilkan karena kelas negatif merupakan kelas pertama berdasarkan urutan label yang digunakan 
         oleh model. Selanjutnya, setiap percabangan akan memisahkan data berdasarkan nilai fitur tertentu hingga mencapai <b>node akhir (leaf node)</b>, yang digunakan sebagai 
         dasar dalam menentukan hasil klasifikasi sentimen.
