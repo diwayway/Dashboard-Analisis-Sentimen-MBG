@@ -295,30 +295,33 @@ with col4:
     sentiment_count = (df["sentimen"].value_counts().reindex(["negatif", "netral", "positif"]))
 
     with colA:
-        pie_fig = go.Figure(data=[go.Pie(
-            labels=sentiment_count.index,
-            values=sentiment_count.values,
-            hole=0.65,
-            marker=dict(
-                colors=["#2FAF77", "#FF78A8", "#A9DBFF"]
-            )
-        )])
-        st.plotly_chart(pie_fig, width="stretch")
+    pie_fig = go.Figure(data=[go.Pie(
+        labels=sentiment_count.index,
+        values=sentiment_count.values,
+        hole=0.65,
+        marker=dict(
+            colors=[
+                "#FF78A8",   # negatif
+                "#2FAF77",   # netral
+                "#A9DBFF"    # positif
+            ]
+        )
+    )])
 
+    st.plotly_chart(pie_fig, width="stretch")
+    
     with colB:
-        bar_fig = go.Figure(data=[go.Bar(
-            x=sentiment_count.index,
-            y=sentiment_count.values,
-            marker_color=["#2FAF77", "#FF78A8", "#A9DBFF"]
-        )])
-        st.plotly_chart(bar_fig, width="stretch")
+    bar_fig = go.Figure(data=[go.Bar(
+        x=sentiment_count.index,
+        y=sentiment_count.values,
+        marker_color=[
+            "#FF78A8",
+            "#2FAF77",
+            "#A9DBFF"
+        ]
+    )])
 
-    st.subheader("Dataset Preview")
-
-    st.dataframe(
-        df[["full_text", "tweet_processed", "sentimen"]].head(20),
-        width="stretch"
-    )
+    st.plotly_chart(bar_fig, width="stretch")
 
 # =====================================
 # TAB 2 - SMOTE
@@ -328,14 +331,14 @@ with tab2:
     st.subheader("Distribusi Data Sebelum dan Sesudah SMOTE")
 
     before_smote = {
-        "Netral":1065,
         "Negatif":741,
+        "Netral":1065,
         "Positif":436
     }
 
     after_smote = {
-        "Netral":1065,
         "Negatif":1065,
+        "Netral":1065,
         "Positif":1065
     }
 
@@ -345,9 +348,13 @@ with tab2:
         st.markdown("### Sebelum SMOTE")
 
         before_fig = go.Figure(data=[go.Bar(
-            x=list(before_smote.keys()),
-            y=list(before_smote.values()),
-            marker_color=["#2FAF77", "#FF78A8", "#A9DBFF"]
+        x=list(before_smote.keys()),
+        y=list(before_smote.values()),
+        marker_color=[
+            "#FF78A8",
+            "#2FAF77",
+            "#A9DBFF"
+            ]
         )])
 
         st.plotly_chart(before_fig, width="stretch")
@@ -356,9 +363,13 @@ with tab2:
         st.markdown("### Sesudah SMOTE")
 
         after_fig = go.Figure(data=[go.Bar(
-            x=list(after_smote.keys()),
-            y=list(after_smote.values()),
-            marker_color=["#2FAF77", "#FF78A8", "#A9DBFF"]
+        x=list(after_smote.keys()),
+        y=list(after_smote.values()),
+        marker_color=[
+            "#FF78A8",
+            "#2FAF77",
+            "#A9DBFF"
+            ]
         )])
 
         st.plotly_chart(after_fig, width="stretch")
