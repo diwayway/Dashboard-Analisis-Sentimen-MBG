@@ -201,71 +201,90 @@ with tab1:
 
     col1, col2, col3, col4 = st.columns(4)
 
-    # 1. Total Data (Sifatnya statis, tidak bisa diklik)
-    with col1:
-        st.markdown(f"""
-        <div class="metric-card card-purple">
-            <div class="metric-title">Total Data</div>
-            <div class="metric-value">{total_data}</div>
+# ==========================================
+# TOTAL DATA
+# ==========================================
+with col1:
+    st.markdown(f"""
+    <div class="metric-card card-purple">
+        <div class="metric-title">Total Data</div>
+        <div class="metric-value">{total_data}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# ==========================================
+# NEGATIF
+# ==========================================
+with col2:
+    st.markdown(f"""
+    <details class="metric-card card-pink">
+        <summary>
+            <div class="card-summary-layout">
+                <div>
+                    <div class="metric-title">Negatif</div>
+                    <div class="metric-value">{negatif}</div>
+                </div>
+                <div class="card-caret">▼</div>
+            </div>
+        </summary>
+
+        <div class="card-dropdown-content">
+            Sentimen <b>negatif</b> menunjukkan opini masyarakat yang berisi kritik, penolakan,
+            ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program
+            Makan Bergizi Gratis (MBG).
         </div>
-        """, unsafe_allow_html=True)
+    </details>
+    """, unsafe_allow_html=True)
 
-    # 2. Netral (Dropdown Card)
-    with col2:
-        st.markdown(f"""
-        <details class="metric-card card-green">
-            <summary>
-                <div class="card-summary-layout">
-                    <div>
-                        <div class="metric-title">Netral</div>
-                        <div class="metric-value">{netral}</div>
-                    </div>
-                    <div class="card-caret">▼</div>
+# ==========================================
+# NETRAL
+# ==========================================
+with col3:
+    st.markdown(f"""
+    <details class="metric-card card-green">
+        <summary>
+            <div class="card-summary-layout">
+                <div>
+                    <div class="metric-title">Netral</div>
+                    <div class="metric-value">{netral}</div>
                 </div>
-            </summary>
-            <div class="card-dropdown-content">
-                Sentimen <b>netral</b> menunjukkan opini masyarakat yang tidak secara jelas mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan, atau komentar yang tidak mengandung kecenderungan sentimen positif maupun negatif.
+                <div class="card-caret">▼</div>
             </div>
-        </details>
-        """, unsafe_allow_html=True)
+        </summary>
 
-    # 3. Negatif (Dropdown Card)
-    with col3:
-        st.markdown(f"""
-        <details class="metric-card card-pink">
-            <summary>
-                <div class="card-summary-layout">
-                    <div>
-                        <div class="metric-title">Negatif</div>
-                        <div class="metric-value">{negatif}</div>
-                    </div>
-                    <div class="card-caret">▼</div>
-                </div>
-            </summary>
-            <div class="card-dropdown-content">
-                Sentimen <b>negatif</b> menunjukkan opini masyarakat yang berisi kritik, penolakan, ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program Makan Bergizi Gratis (MBG).
-            </div>
-        </details>
-        """, unsafe_allow_html=True)
+        <div class="card-dropdown-content">
+            Sentimen <b>netral</b> menunjukkan opini masyarakat yang tidak secara jelas
+            mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada
+            kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan,
+            atau komentar yang tidak mengandung kecenderungan sentimen positif
+            maupun negatif.
+        </div>
+    </details>
+    """, unsafe_allow_html=True)
 
-    # 4. Positif (Dropdown Card)
-    with col4:
-        st.markdown(f"""
-        <details class="metric-card card-blue">
-            <summary>
-                <div class="card-summary-layout">
-                    <div>
-                        <div class="metric-title">Positif</div>
-                        <div class="metric-value">{positif}</div>
-                    </div>
-                    <div class="card-caret">▼</div>
+# ==========================================
+# POSITIF
+# ==========================================
+with col4:
+    st.markdown(f"""
+    <details class="metric-card card-blue">
+        <summary>
+            <div class="card-summary-layout">
+                <div>
+                    <div class="metric-title">Positif</div>
+                    <div class="metric-value">{positif}</div>
                 </div>
-            </summary>
-            <div class="card-dropdown-content">
-                Sentimen <b>positif</b> menunjukkan opini masyarakat yang mendukung, mengapresiasi, atau memberikan tanggapan yang baik terhadap Program Makan Bergizi Gratis (MBG).
+                <div class="card-caret">▼</div>
             </div>
-        </details>
-        """, unsafe_allow_html=True)
+        </summary>
+
+        <div class="card-dropdown-content">
+            Sentimen <b>positif</b> menunjukkan opini masyarakat yang mendukung,
+            mengapresiasi, atau memberikan tanggapan yang baik terhadap Program
+            Makan Bergizi Gratis (MBG).
+        </div>
+    </details>
+    """, unsafe_allow_html=True)
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 
@@ -273,7 +292,7 @@ with tab1:
 
     colA, colB = st.columns(2)
 
-    sentiment_count = df["sentimen"].value_counts()
+    sentiment_count = (df["sentimen"].value_counts().reindex(["negatif", "netral", "positif"]))
 
     with colA:
         pie_fig = go.Figure(data=[go.Pie(
