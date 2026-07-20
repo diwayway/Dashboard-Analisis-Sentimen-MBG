@@ -168,7 +168,7 @@ total_data = len(df)
 netral = len(df[df["sentimen"] == "netral"])
 negatif = len(df[df["sentimen"] == "negatif"])
 positif = len(df[df["sentimen"] == "positif"])
-accuracy = 94.38
+accuracy = 94.69
 
 # =====================================
 # HEADER
@@ -201,9 +201,7 @@ with tab1:
 
     col1, col2, col3, col4 = st.columns(4)
 
-    # ==========================================
-    # TOTAL DATA
-    # ==========================================
+    # 1. Total Data (Sifatnya statis, tidak bisa diklik)
     with col1:
         st.markdown(f"""
         <div class="metric-card card-purple">
@@ -212,34 +210,8 @@ with tab1:
         </div>
         """, unsafe_allow_html=True)
 
-    # ==========================================
-    # NEGATIF
-    # ==========================================
+    # 2. Netral (Dropdown Card)
     with col2:
-        st.markdown(f"""
-        <details class="metric-card card-pink">
-            <summary>
-                <div class="card-summary-layout">
-                    <div>
-                        <div class="metric-title">Negatif</div>
-                        <div class="metric-value">{negatif}</div>
-                    </div>
-                    <div class="card-caret">▼</div>
-                </div>
-            </summary>
-
-            <div class="card-dropdown-content">
-                Sentimen <b>negatif</b> menunjukkan opini masyarakat yang berisi kritik, penolakan,
-                ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program
-                Makan Bergizi Gratis (MBG).
-            </div>
-        </details>
-        """, unsafe_allow_html=True)
-
-    # ==========================================
-    # NETRAL
-    # ==========================================
-    with col3:
         st.markdown(f"""
         <details class="metric-card card-green">
             <summary>
@@ -251,20 +223,32 @@ with tab1:
                     <div class="card-caret">▼</div>
                 </div>
             </summary>
-
             <div class="card-dropdown-content">
-                Sentimen <b>netral</b> menunjukkan opini masyarakat yang tidak secara jelas
-                mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada
-                kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan,
-                atau komentar yang tidak mengandung kecenderungan sentimen positif
-                maupun negatif.
+                Sentimen <b>netral</b> menunjukkan opini masyarakat yang tidak secara jelas mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan, atau komentar yang tidak mengandung kecenderungan sentimen positif maupun negatif.
             </div>
         </details>
         """, unsafe_allow_html=True)
 
-    # ==========================================
-    # POSITIF
-    # ==========================================
+    # 3. Negatif (Dropdown Card)
+    with col3:
+        st.markdown(f"""
+        <details class="metric-card card-pink">
+            <summary>
+                <div class="card-summary-layout">
+                    <div>
+                        <div class="metric-title">Negatif</div>
+                        <div class="metric-value">{negatif}</div>
+                    </div>
+                    <div class="card-caret">▼</div>
+                </div>
+            </summary>
+            <div class="card-dropdown-content">
+                Sentimen <b>negatif</b> menunjukkan opini masyarakat yang berisi kritik, penolakan, ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program Makan Bergizi Gratis (MBG).
+            </div>
+        </details>
+        """, unsafe_allow_html=True)
+
+    # 4. Positif (Dropdown Card)
     with col4:
         st.markdown(f"""
         <details class="metric-card card-blue">
@@ -277,11 +261,8 @@ with tab1:
                     <div class="card-caret">▼</div>
                 </div>
             </summary>
-
             <div class="card-dropdown-content">
-                Sentimen <b>positif</b> menunjukkan opini masyarakat yang mendukung,
-                mengapresiasi, atau memberikan tanggapan yang baik terhadap Program
-                Makan Bergizi Gratis (MBG).
+                Sentimen <b>positif</b> menunjukkan opini masyarakat yang mendukung, mengapresiasi, atau memberikan tanggapan yang baik terhadap Program Makan Bergizi Gratis (MBG).
             </div>
         </details>
         """, unsafe_allow_html=True)
@@ -292,7 +273,7 @@ with tab1:
 
     colA, colB = st.columns(2)
 
-    sentiment_count = (df["sentimen"].value_counts().reindex(["negatif", "netral", "positif"]))
+    sentiment_count = df["sentimen"].value_counts()
 
     with colA:
         pie_fig = go.Figure(data=[go.Pie(
@@ -300,28 +281,25 @@ with tab1:
             values=sentiment_count.values,
             hole=0.65,
             marker=dict(
-                colors=[
-                    "#FF78A8",   # negatif
-                    "#2FAF77",   # netral
-                    "#A9DBFF"    # positif
-                ]
+                colors=["#2FAF77", "#FF78A8", "#A9DBFF"]
             )
         )])
-
         st.plotly_chart(pie_fig, width="stretch")
-    
+
     with colB:
         bar_fig = go.Figure(data=[go.Bar(
             x=sentiment_count.index,
             y=sentiment_count.values,
-            marker_color=[
-                "#FF78A8",
-                "#2FAF77",
-                "#A9DBFF"
-            ]
+            marker_color=["#2FAF77", "#FF78A8", "#A9DBFF"]
         )])
-
         st.plotly_chart(bar_fig, width="stretch")
+
+    st.subheader("Dataset Preview")
+
+    st.dataframe(
+        df[["full_text", "tweet_processed", "sentimen"]].head(20),
+        width="stretch"
+    )
 
 # =====================================
 # TAB 2 - SMOTE
@@ -331,15 +309,15 @@ with tab2:
     st.subheader("Distribusi Data Sebelum dan Sesudah SMOTE")
 
     before_smote = {
-        "Negatif":741,
-        "Netral":1065,
-        "Positif":436
+        "Netral": 1526,
+        "Negatif": 1054,
+        "Positif": 623
     }
 
     after_smote = {
-        "Negatif":1065,
-        "Netral":1065,
-        "Positif":1065
+        "Netral": 1068,
+        "Negatif": 1068,
+        "Positif": 1068
     }
 
     col1, col2 = st.columns(2)
@@ -350,11 +328,7 @@ with tab2:
         before_fig = go.Figure(data=[go.Bar(
             x=list(before_smote.keys()),
             y=list(before_smote.values()),
-            marker_color=[
-                "#FF78A8",
-                "#2FAF77",
-                "#A9DBFF"
-            ]
+            marker_color=["#2FAF77", "#FF78A8", "#A9DBFF"]
         )])
 
         st.plotly_chart(before_fig, width="stretch")
@@ -365,31 +339,19 @@ with tab2:
         after_fig = go.Figure(data=[go.Bar(
             x=list(after_smote.keys()),
             y=list(after_smote.values()),
-            marker_color=[
-                "#FF78A8",
-                "#2FAF77",
-                "#A9DBFF"
-            ]
+            marker_color=["#2FAF77", "#FF78A8", "#A9DBFF"]
         )])
 
         st.plotly_chart(after_fig, width="stretch")
 
     st.markdown("""
     <div class="insight-box">
-    Sebelum dilakukan SMOTE, data training hasil proses split data dengan rasio 70:30 menunjukkan distribusi kelas yang tidak seimbang, 
-    yaitu sebanyak 1065 data pada kelas netral, 741 data pada kelas negatif, dan 436 data pada kelas positif. Kondisi ini dapat menyebabkan 
-    model lebih cenderung mempelajari pola dari kelas mayoritas sehingga kurang optimal dalam mengenali kelas minoritas. Oleh karena itu, 
-    metode SMOTE diterapkan hanya pada data training untuk menambah jumlah data pada kelas yang memiliki jumlah lebih sedikit agar distribusi 
-    kelas menjadi lebih seimbang. Setelah proses SMOTE dilakukan, jumlah data pada masing-masing kelas menjadi 1065 data sehingga total data 
-    training meningkat menjadi 3195 data. Dengan distribusi kelas yang seimbang, model dapat mempelajari pola dari setiap kelas secara lebih 
-    proporsional serta mengurangi bias terhadap kelas mayoritas.
-
-    Sebelum dilakukan SMOTE, data training hasil pembagian data dengan rasio 70:30 menunjukkan distribusi kelas yang tidak seimbang, yaitu sebanyak
-    1065 data pada kelas netral, 741 data pada kelas negatif, dan 436 data pada kelas positif. Kondisi ini berpotensi menyebabkan model lebih cenderung 
-    mempelajari pola dari kelas mayoritas sehingga kemampuan dalam mengklasifikasikan kelas minoritas menjadi kurang optimal. Oleh karena itu, metode SMOTE 
-    diterapkan hanya pada data training untuk menghasilkan data sintetis pada kelas minoritas hingga jumlah setiap kelas menjadi seimbang. Setelah proses SMOTE dilakukan, 
-    jumlah data pada masing-masing kelas menjadi 1065 data sehingga total data training meningkat menjadi 3195 data. Dengan distribusi kelas yang seimbang, model diharapkan 
-    dapat mempelajari karakteristik setiap kelas secara lebih proporsional serta mengurangi kecenderungan bias terhadap kelas mayoritas.
+    Sebelum dilakukan SMOTE, distribusi data menunjukkan ketidakseimbangan antar kelas sentimen, di mana kelas netral mendominasi data, 
+    sedangkan kelas positif memiliki jumlah paling sedikit. Kondisi ini dapat menyebabkan model lebih cenderung mempelajari pola dari kelas 
+    mayoritas dan kurang optimal dalam mengenali kelas minoritas. Oleh karena itu, SMOTE digunakan pada data training untuk menambah data 
+    pada kelas yang jumlahnya lebih sedikit agar distribusi data menjadi lebih seimbang. Setelah proses SMOTE dilakukan, jumlah data pada 
+    masing-masing kelas menjadi 1068 data, sehingga distribusi data lebih seimbang dan model dapat belajar dengan lebih baik serta mengurangi 
+    bias terhadap kelas mayoritas.
     </div>
     """, unsafe_allow_html=True)
 
@@ -419,13 +381,16 @@ with tab3:
     with col2:
         st.markdown("""
         <div class="insight-box">
-        Berdasarkan confusion matrix di samping, model Decision Tree yang telah melalui proses SMOTE mampu melakukan klasifikasi dengan sangat 
-        baik pada ketiga kelas sentimen. Nilai pada diagonal utama menunjukkan jumlah prediksi yang benar, yaitu sebanyak 301 data pada kelas negatif, 
-        435 data pada kelas netral, dan 171 data pada kelas positif. Sementara itu, masih terdapat beberapa kesalahan klasifikasi. Pada kelas negatif, 
-        sebanyak 14 data diprediksi sebagai netral dan 2 data diprediksi sebagai positif. Pada kelas netral, terdapat 8 data yang diprediksi sebagai 
-        negatif dan 14 data yang diprediksi sebagai positif. Adapun pada kelas positif, terdapat 7 data yang diprediksi sebagai negatif dan 9 data yang diprediksi sebagai netral. 
-        Hasil tersebut menunjukkan bahwa sebagian besar data berhasil diklasifikasikan dengan benar sehingga model memiliki kemampuan yang baik dalam 
-        membedakan ketiga kelas sentimen.
+        Berdasarkan confusion matrix di samping, model Decision Tree yang telah melalui proses SMOTE 
+        menunjukkan hasil klasifikasi yang cukup baik pada ketiga kelas sentimen. Nilai pada diagonal 
+        utama menunjukkan jumlah prediksi yang benar, yaitu sebanyak 302 data untuk sentimen negatif, 
+        437 data untuk sentimen netral, dan 173 data untuk sentimen positif. Sementara itu, nilai di 
+        luar diagonal menunjukkan kesalahan klasifikasi, seperti data negatif yang diprediksi sebagai 
+        netral sebanyak 11 data dan positif sebanyak 3 data. Pada kelas netral, terdapat 10 data yang 
+        diprediksi sebagai negatif dan 11 data sebagai positif. Sedangkan pada kelas positif, terdapat 
+        masing-masing 7 data yang salah diprediksi sebagai negatif dan netral. Hasil tersebut menunjukkan 
+        bahwa model mampu mengenali pola sentimen dengan cukup baik, terutama pada kelas netral yang memiliki 
+        jumlah prediksi benar paling tinggi, meskipun masih terdapat beberapa kesalahan klasifikasi antar kelas.
         </div>
         """, unsafe_allow_html=True)
 
@@ -442,7 +407,7 @@ with tab3:
         st.markdown("""
         <div class="insight-box">
         Berdasarkan visualisasi wordcloud yang ditampilkan, terlihat beberapa kata yang paling sering muncul dalam data 
-        tweet terkait Program Makan Bergizi Gratis (MBG), seperti “makan”, “gizi”, “gratis”, “mbg”, dan “program”. 
+        tweet terkait Program Makan Bergizi Gratis (MBG), seperti “gizi”, “gratis”, “mbg”, “makan”, dan “program”. 
         Ukuran kata yang lebih besar menunjukkan frekuensi kemunculan yang lebih tinggi dalam dataset. Visualisasi 
         ini memberikan gambaran umum mengenai topik utama yang banyak dibahas masyarakat terkait program MBG.
         </div>
@@ -462,7 +427,7 @@ with tab3:
         <div class="insight-box">
         Berdasarkan grafik frekuensi kata di samping, terlihat bahwa kata “mbg”, “gizi”, “makan”, “gratis”, dan “program” 
         menjadi kata yang paling sering muncul dalam dataset. Visualisasi ini membantu memperlihatkan kata-kata dominan 
-        yang sering digunakan dalam opini masyarakat terkait Program Makan Bergizi Gratis (MBG).
+        yang sering digunakan dalam opini masyarakat terkait program MBG.
         </div>
         """, unsafe_allow_html=True)
 
@@ -478,16 +443,15 @@ with tab3:
     with col2:
         st.markdown("""
         <div class="insight-box">
-        Berdasarkan visualisasi <b>Decision Tree</b> yang ditampilkan, proses klasifikasi dimulai dari <b>node akar (root node)</b> sebagai titik 
-        awal pengambilan keputusan. Pada node tersebut terdapat aturan <b>x[603] ≤ 0.698</b>, yang menunjukkan bahwa model menggunakan <b>fitur ke-603</b> 
-        hasil <b>feature extraction</b> menggunakan <b>IndoBERT Embedding</b> sebagai dasar pemisahan data. Nilai <b>entropy</b> sebesar <b>1.585</b> menunjukkan 
-        bahwa distribusi kelas pada node awal masih bercampur sehingga proses pemisahan data masih perlu dilakukan pada percabangan berikutnya. Sementara itu, nilai 
-        <b>samples</b> sebesar <b>3195</b> menunjukkan jumlah data latih yang digunakan dalam proses pembentukan Decision Tree setelah melalui proses <b>oversampling</b> 
-        menggunakan metode <b>SMOTE</b>. Jumlah tersebut lebih besar dibandingkan jumlah data latih awal sebanyak <b>2242</b> data karena kelas minoritas telah 
-        ditambahkan hingga seluruh kelas memiliki jumlah yang sama. Hal tersebut ditunjukkan oleh nilai <b>value = [1065, 1065, 1065]</b>, yang menyatakan bahwa 
-        masing-masing kelas sentimen, yaitu <b>negatif</b>, <b>netral</b>, dan <b>positif</b>, masing-masing memiliki <b>1065</b> data setelah proses SMOTE. Meskipun 
-        distribusi ketiga kelas telah seimbang, nilai <b>class = Negatif</b> ditampilkan karena kelas negatif merupakan kelas pertama berdasarkan urutan label yang digunakan 
-        oleh model. Selanjutnya, setiap percabangan akan memisahkan data berdasarkan nilai fitur tertentu hingga mencapai <b>node akhir (leaf node)</b>, yang digunakan sebagai 
-        dasar dalam menentukan hasil klasifikasi sentimen.
+        Berdasarkan visualisasi Decision Tree yang ditampilkan, proses klasifikasi dimulai dari node paling atas sebagai titik awal 
+        pengambilan keputusan. Pada node tersebut terdapat aturan <b>x[603] <= 0.625</b>, yang menunjukkan bahwa model menggunakan 
+        fitur ke-603 dari hasil <b>word embedding</b> IndoBERT untuk membagi data. Nilai <b>entropy</b> sebesar <b>1.585</b> menunjukkan bahwa 
+        data pada node awal masih memiliki tingkat campuran yang tinggi. Semakin kecil nilai <b>entropy</b>, maka data pada node tersebut 
+        semakin seragam dan keputusan model menjadi lebih jelas. Nilai <b>samples</b> sebesar <b>3204</b> menunjukkan jumlah data yang diproses, 
+        sedangkan nilai <b>value</b> sebesar <b>[1068, 1068, 1068]</b> menunjukkan jumlah data pada masing-masing kelas sentimen, yaitu negatif, 
+        netral, dan positif yang telah diseimbangkan menggunakan SMOTE. Meskipun jumlah data pada ketiga kelas sama, nilai <b>class</b> ditampilkan 
+        sebagai <b>negatif</b> karena urutan kelas dimulai dari negatif, netral, lalu positif, sehingga kelas pertama dipilih sebagai kelas dominan. 
+        Percabangan pada bagian bawah merupakan lanjutan dari proses pembagian data sebelumnya dapat menentukan hasil klasifikasi sentimen akhir 
+        dengan lebih spesifik.
         </div>
         """, unsafe_allow_html=True)
