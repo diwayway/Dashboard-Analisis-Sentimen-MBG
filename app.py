@@ -201,90 +201,90 @@ with tab1:
 
     col1, col2, col3, col4 = st.columns(4)
 
-# ==========================================
-# TOTAL DATA
-# ==========================================
-with col1:
-    st.markdown(f"""
-    <div class="metric-card card-purple">
-        <div class="metric-title">Total Data</div>
-        <div class="metric-value">{total_data}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-# ==========================================
-# NEGATIF
-# ==========================================
-with col2:
-    st.markdown(f"""
-    <details class="metric-card card-pink">
-        <summary>
-            <div class="card-summary-layout">
-                <div>
-                    <div class="metric-title">Negatif</div>
-                    <div class="metric-value">{negatif}</div>
-                </div>
-                <div class="card-caret">▼</div>
-            </div>
-        </summary>
-
-        <div class="card-dropdown-content">
-            Sentimen <b>negatif</b> menunjukkan opini masyarakat yang berisi kritik, penolakan,
-            ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program
-            Makan Bergizi Gratis (MBG).
+    # ==========================================
+    # TOTAL DATA
+    # ==========================================
+    with col1:
+        st.markdown(f"""
+        <div class="metric-card card-purple">
+            <div class="metric-title">Total Data</div>
+            <div class="metric-value">{total_data}</div>
         </div>
-    </details>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
-# ==========================================
-# NETRAL
-# ==========================================
-with col3:
-    st.markdown(f"""
-    <details class="metric-card card-green">
-        <summary>
-            <div class="card-summary-layout">
-                <div>
-                    <div class="metric-title">Netral</div>
-                    <div class="metric-value">{netral}</div>
+    # ==========================================
+    # NEGATIF
+    # ==========================================
+    with col2:
+        st.markdown(f"""
+        <details class="metric-card card-pink">
+            <summary>
+                <div class="card-summary-layout">
+                    <div>
+                        <div class="metric-title">Negatif</div>
+                        <div class="metric-value">{negatif}</div>
+                    </div>
+                    <div class="card-caret">▼</div>
                 </div>
-                <div class="card-caret">▼</div>
+            </summary>
+
+            <div class="card-dropdown-content">
+                Sentimen <b>negatif</b> menunjukkan opini masyarakat yang berisi kritik, penolakan,
+                ketidakpuasan, atau tanggapan yang kurang mendukung terhadap Program
+                Makan Bergizi Gratis (MBG).
             </div>
-        </summary>
+        </details>
+        """, unsafe_allow_html=True)
 
-        <div class="card-dropdown-content">
-            Sentimen <b>netral</b> menunjukkan opini masyarakat yang tidak secara jelas
-            mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada
-            kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan,
-            atau komentar yang tidak mengandung kecenderungan sentimen positif
-            maupun negatif.
-        </div>
-    </details>
-    """, unsafe_allow_html=True)
-
-# ==========================================
-# POSITIF
-# ==========================================
-with col4:
-    st.markdown(f"""
-    <details class="metric-card card-blue">
-        <summary>
-            <div class="card-summary-layout">
-                <div>
-                    <div class="metric-title">Positif</div>
-                    <div class="metric-value">{positif}</div>
+    # ==========================================
+    # NETRAL
+    # ==========================================
+    with col3:
+        st.markdown(f"""
+        <details class="metric-card card-green">
+            <summary>
+                <div class="card-summary-layout">
+                    <div>
+                        <div class="metric-title">Netral</div>
+                        <div class="metric-value">{netral}</div>
+                    </div>
+                    <div class="card-caret">▼</div>
                 </div>
-                <div class="card-caret">▼</div>
-            </div>
-        </summary>
+            </summary>
 
-        <div class="card-dropdown-content">
-            Sentimen <b>positif</b> menunjukkan opini masyarakat yang mendukung,
-            mengapresiasi, atau memberikan tanggapan yang baik terhadap Program
-            Makan Bergizi Gratis (MBG).
-        </div>
-    </details>
-    """, unsafe_allow_html=True)
+            <div class="card-dropdown-content">
+                Sentimen <b>netral</b> menunjukkan opini masyarakat yang tidak secara jelas
+                mendukung maupun menolak Program Makan Bergizi Gratis (MBG). Tweet pada
+                kategori ini umumnya berupa penyampaian informasi, berita, pertanyaan,
+                atau komentar yang tidak mengandung kecenderungan sentimen positif
+                maupun negatif.
+            </div>
+        </details>
+        """, unsafe_allow_html=True)
+
+    # ==========================================
+    # POSITIF
+    # ==========================================
+    with col4:
+        st.markdown(f"""
+        <details class="metric-card card-blue">
+            <summary>
+                <div class="card-summary-layout">
+                    <div>
+                        <div class="metric-title">Positif</div>
+                        <div class="metric-value">{positif}</div>
+                    </div>
+                    <div class="card-caret">▼</div>
+                </div>
+            </summary>
+
+            <div class="card-dropdown-content">
+                Sentimen <b>positif</b> menunjukkan opini masyarakat yang mendukung,
+                mengapresiasi, atau memberikan tanggapan yang baik terhadap Program
+                Makan Bergizi Gratis (MBG).
+            </div>
+        </details>
+        """, unsafe_allow_html=True)
 
     st.markdown("<br><br>", unsafe_allow_html=True)
 
@@ -295,33 +295,33 @@ with col4:
     sentiment_count = (df["sentimen"].value_counts().reindex(["negatif", "netral", "positif"]))
 
     with colA:
-    pie_fig = go.Figure(data=[go.Pie(
-        labels=sentiment_count.index,
-        values=sentiment_count.values,
-        hole=0.65,
-        marker=dict(
-            colors=[
-                "#FF78A8",   # negatif
-                "#2FAF77",   # netral
-                "#A9DBFF"    # positif
-            ]
-        )
-    )])
+        pie_fig = go.Figure(data=[go.Pie(
+            labels=sentiment_count.index,
+            values=sentiment_count.values,
+            hole=0.65,
+            marker=dict(
+                colors=[
+                    "#FF78A8",   # negatif
+                    "#2FAF77",   # netral
+                    "#A9DBFF"    # positif
+                ]
+            )
+        )])
 
-    st.plotly_chart(pie_fig, width="stretch")
+        st.plotly_chart(pie_fig, width="stretch")
     
     with colB:
-    bar_fig = go.Figure(data=[go.Bar(
-        x=sentiment_count.index,
-        y=sentiment_count.values,
-        marker_color=[
-            "#FF78A8",
-            "#2FAF77",
-            "#A9DBFF"
-        ]
-    )])
+        bar_fig = go.Figure(data=[go.Bar(
+            x=sentiment_count.index,
+            y=sentiment_count.values,
+            marker_color=[
+                "#FF78A8",
+                "#2FAF77",
+                "#A9DBFF"
+            ]
+        )])
 
-    st.plotly_chart(bar_fig, width="stretch")
+        st.plotly_chart(bar_fig, width="stretch")
 
 # =====================================
 # TAB 2 - SMOTE
@@ -348,12 +348,12 @@ with tab2:
         st.markdown("### Sebelum SMOTE")
 
         before_fig = go.Figure(data=[go.Bar(
-        x=list(before_smote.keys()),
-        y=list(before_smote.values()),
-        marker_color=[
-            "#FF78A8",
-            "#2FAF77",
-            "#A9DBFF"
+            x=list(before_smote.keys()),
+            y=list(before_smote.values()),
+            marker_color=[
+                "#FF78A8",
+                "#2FAF77",
+                "#A9DBFF"
             ]
         )])
 
@@ -363,12 +363,12 @@ with tab2:
         st.markdown("### Sesudah SMOTE")
 
         after_fig = go.Figure(data=[go.Bar(
-        x=list(after_smote.keys()),
-        y=list(after_smote.values()),
-        marker_color=[
-            "#FF78A8",
-            "#2FAF77",
-            "#A9DBFF"
+            x=list(after_smote.keys()),
+            y=list(after_smote.values()),
+            marker_color=[
+                "#FF78A8",
+                "#2FAF77",
+                "#A9DBFF"
             ]
         )])
 
