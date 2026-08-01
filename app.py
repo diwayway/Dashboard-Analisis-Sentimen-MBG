@@ -390,13 +390,6 @@ with tab2:
     kelas menjadi lebih seimbang. Setelah proses SMOTE dilakukan, jumlah data pada masing-masing kelas menjadi 1065 data sehingga total data 
     training meningkat menjadi 3195 data. Dengan distribusi kelas yang seimbang, model dapat mempelajari pola dari setiap kelas secara lebih 
     proporsional serta mengurangi bias terhadap kelas mayoritas.
-
-    Sebelum dilakukan SMOTE, data training hasil pembagian data dengan rasio 70:30 menunjukkan distribusi kelas yang tidak seimbang, yaitu sebanyak
-    1065 data pada kelas netral, 741 data pada kelas negatif, dan 436 data pada kelas positif. Kondisi ini berpotensi menyebabkan model lebih cenderung 
-    mempelajari pola dari kelas mayoritas sehingga kemampuan dalam mengklasifikasikan kelas minoritas menjadi kurang optimal. Oleh karena itu, metode SMOTE 
-    diterapkan hanya pada data training untuk menghasilkan data sintetis pada kelas minoritas hingga jumlah setiap kelas menjadi seimbang. Setelah proses SMOTE dilakukan, 
-    jumlah data pada masing-masing kelas menjadi 1065 data sehingga total data training meningkat menjadi 3195 data. Dengan distribusi kelas yang seimbang, model diharapkan 
-    dapat mempelajari karakteristik setiap kelas secara lebih proporsional serta mengurangi kecenderungan bias terhadap kelas mayoritas.
     </div>
     """, unsafe_allow_html=True)
 
